@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('admin', function (Blueprint $table) {
             $table->id('admin_id');
             $table->foreignId('id')->unique();
-            $table->foreignId('agri_districts')->unique();
+         
     
         });
     }

@@ -3,7 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
-use App\Http\Controllers\Backend\FarmersController;
+use App\Http\Controllers\Backend\PersonalInformationsController;
+use App\Http\Controllers\Backend\FixedCostController;
+use App\Http\Controllers\Backend\FarmProfileController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,10 +44,18 @@ Route::middleware(['auth','role:admin'])->group(function(){
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::patch('/admin/profile', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
     
-    Route::controller(FarmersController::class)->group(function(){
-            Route::get('/ricefarmer/forms', 'RiceFarmers')->name('farmers.rice_farmersforms');
+   Route::controller(PersonalInformationsController::class)->group(function(){
+           Route::get('/ricefarmer/forms', 'RiceFarmers')->name('farmers.rice_farmersforms');
             Route::get('/rice/map', 'RiceMap')->name('farmers.form.rice_map');
-    });
+            Route::get('/personalinfo/index', 'index')->name('personalinfo.index');
+            Route::get('/farm/index', 'FarmForm')->name('farm_profile.index');
+            Route::get('/fixed/index', 'FixedForms')->name('fixed_cost.index');
+            Route::get('/machineries/index', 'MachineForms')->name('machineries_used.index');
+            Route::get('/production/index', 'ProductionForms')->name('production_data.index');
+            Route::get('/variable/index', 'VariableForms')->name('variable_cost.index');
+            
+
+   });
 
 
 });//end Group admin middleware

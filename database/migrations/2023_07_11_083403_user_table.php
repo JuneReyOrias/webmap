@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('user_acc', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->id('uacc_id');
             $table->foreignId('id')->unique();
-            $table->foreignId('agri_districts')->unique();
+          
     
         });
     }

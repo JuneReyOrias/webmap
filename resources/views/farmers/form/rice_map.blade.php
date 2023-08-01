@@ -4,9 +4,7 @@
 
   <nav class="page-breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Map</a></li>
-      <li class="breadcrumb-item active" aria-current="page">ZamboAgriMap</li>
-    </ol>
+  
   </nav>
 <html lang="en">
 <head>
@@ -14,444 +12,394 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Map - Farmer's View</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
     <style>
-        *{
-            box-sizing: border-box;
-        }
-        body{
-            margin-top: 20px;
-            padding: 0;
-        }
-        #map{
-            height: 500px;
-        }
+      *{
+    box-sizing: border-box;
+}
+body{
+margin-top: 20px;
+
+padding: 0;
+    
+}
+#map{
+    height: 1000px; 
+    
+}
+
+.search-container {
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    left: 50px; /* Adjust the left position as needed */
+    z-index: 800;
+  }
+  
+
     </style>
 </head>
 <body>
     <div id="map"></div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
-        window.onload = init;
+    
+    window.onload = init;
 
-        function init() {
-            const mapElement = document.getElementById('map');
+function init() {
+  const mapElement = document.getElementById('map');
+  const map = L.map(mapElement).setView([6.9214, 122.0790], 11);
 
-            const base2layer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {})
-            const base1layer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    })
+  const base2layer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {}).addTo(map);
+  const base1layer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {});
 
-            const mymap = L.map(mapElement, {
-                center: [6.9214, 122.0790],
-                zoom: 13,
-                layers: [base2layer]
-            })
-            const baseLayers = {
-        'base2layer': base2layer,
-        'base1layer': base1layer
+  const baseLayers = {
+    'World Imagery': base2layer,
+    'OpenStreetMap': base1layer
+  };
+
+  L.control.layers(baseLayers).addTo(map);
+
+  const drawPolyline = L.polyline([], { color: 'red', weight: 5 }).addTo(map);
+  const masterPolyline = L.polyline([], { color: 'blue', weight: 5, fill: 'white' }).addTo(map);
+  const masterLineCoordinates = [];
+
+  map.on('click', function(e) {
+    const latlng = e.latlng;
+    drawPolyline.addLatLng(latlng);
+  });
+
+  map.on('dblclick', function(e) {
+    const clickedAllCoordinates = drawPolyline.getLatLngs();
+    const clickedAllCoordinatesExceptTheLastOne = clickedAllCoordinates.slice(0, clickedAllCoordinates.length - 1);
+
+    masterLineCoordinates.push(clickedAllCoordinatesExceptTheLastOne);
+    masterPolyline.setLatLngs(masterLineCoordinates);
+
+    localStorage.setItem('lineCoordinates', JSON.stringify(masterLineCoordinates));
+
+    drawPolyline.setLatLngs([]);
+  });
+
+  function clearStoredLineCoordinates() {
+    localStorage.removeItem('lineCoordinates');
+    masterLineCoordinates.pop();
+    masterPolyline.setLatLngs(masterLineCoordinates);
+  }
+
+  const clearButton = document.createElement('button');
+  clearButton.innerHTML = 'Clear';
+  clearButton.addEventListener('click', clearStoredLineCoordinates);
+  document.body.appendChild(clearButton);
+
+  // Marker and additional marker data
+  const districtsData = [
+    {
+      name: 'Ayala District',
+      masterCoordinates: [[6.9640, 121.9445]],
+      additionalCoordinates: [
+        [6.962612, 121.957403],
+        [6.963518, 121.952942],
+        [6.963828, 121.953634],
+        [6.960466, 121.953829],
+        [6.964878, 121.958875],
+        [6.9648, 121.957938],
+        [6.965477, 121.960475],
+        [6.964825, 121.9599723],
+        [6.965538, 121.959663],
+        [6.970897, 121.960732],
+        [6.960203, 121.962074],
+        [6.961795, 121.95877],
+        [6.968231, 121.962136],
+        [6.971381, 121.96035],
+        [6.967591, 121.953692],
+        [6.96352, 121.963639],
+        [6.978943, 121.936932],
+        [6.980922, 121.935174],
+        [6.978391, 121.934411],
+        [6.975148, 121.9379],
+        [6.994362, 121.940397],
+        [6.98111, 121.937248],
+        [6.976435, 121.942473],
+        [6.976875, 121.943403],
+        [6.977755, 121.943267],
+        [6.976787, 121.941883],
+        [7.016884, 121.922146],
+        [6.999188, 121.9478],
+      ]
+    },
+    {
+      name: 'Manicahan District',
+      masterCoordinates: [[7.0245, 122.1935]],
+      additionalCoordinates: [
+        [7.0277468, 122.1916938],
+        [7.0264131, 122.1916883],
+        [7.0278417, 122.1969116],
+        [7.0270209, 122.1992409],
+        [7.0258395, 122.1914175],
+        [7.0258467, 122.1919925],
+        [7.0281803, 122.1936666],
+        [7.0257487, 122.1992006],
+        [7.0276412, 122.1907373],
+        [7.0276835, 122.1940376],
+        [7.0256115, 122.1949751],
+        [7.0284182, 122.1927858],
+        [7.0272389, 122.1906995],
+        [7.0267005, 122.1957214],
+        [7.0269416, 122.1898006],
+        [7.0275498, 122.1905713],
+        [7.0250084, 122.1977179],
+        [7.0255155, 122.196101],
+        [7.0277927, 122.1918688],
+        [7.0283826, 122.1928424],
+        [7.0275433, 122.1898976],
+        [7.027684, 122.1912042],
+        [7.0264706, 122.1958649],
+        [7.0264652, 122.1980721],
+        [7.0259486, 122.1898619],
+        [7.02666, 122.1943318],
+        [7.0257078, 122.1906664],
+        [7.0273012, 122.195668],
+        [7.0262985, 122.1898262],
+        [7.0277053, 122.1914797],
+        [7.0275722, 122.1900962],
+        [7.02566, 122.1897296],
+        [7.0259558, 122.1944866],
+        [7.0280398, 122.191854],
+        [7.0246103, 122.2011931],
+        [7.0258267, 122.1991976],
+        [7.0279407, 122.1970312],
+        [7.0283927, 122.1974594],
+        [7.0250946, 122.1979214],
+        [7.017962, 122.1849057],
+        [7.0201911, 122.1867535],
+        [7.0095571, 122.1871316],
+        [7.0214148, 122.1853971],
+        [7.0222296, 122.1877235],
+        [7.0177795, 122.1852886],
+        [7.0184864, 122.1843285],
+        [7.0106703, 122.1867337],
+        [7.0102231, 122.187946],
+        [7.0222059, 122.1876731],
+        [7.0214731, 122.1859948],
+        [7.0214024, 122.1865264],
+        [7.0106951, 122.1878787],
+        [7.0116362, 122.1848414],
+        [7.0140823, 122.1850348],
+        [7.0219898, 122.1872227],
+        [7.0219855, 122.1872309],
+        [7.0177739, 122.1858139],
+        [7.0177652, 122.1855441],
+        [7.0108466, 122.1873462],
+        [7.0187292, 122.1856008],
+        [7.0121802, 122.1833145],
+        [7.0128348, 122.1877822],
+        [7.0125447, 122.1851874],
+        [7.0109895, 122.1848042], , [7.0119804, 122.1845108],
+        [7.0118518, 122.1834867],
+        [7.0210464, 122.1855198],
+        [7.02216, 122.187561],
+        [7.0125169, 122.1832807],
+        [7.012167, 122.1863018],
+        [7.0196368, 122.1855175],
+        [7.0183262, 122.1846522],
+        [7.0220853, 122.1873916],
+        [7.0105948, 122.1849108],
+        [7.0123345, 122.1846037],
+        [7.0113622, 122.1836622],
+        [7.100949, 122.2341997],
+        [7.1077309, 122.2351404],
+        [7.1098989, 122.2365135],
+        [7.109586, 122.2353185],
+        [7.1044862, 122.2398883],
+        [7.1070321, 122.2390386],
+        [7.1074868, 122.2374661],
+        [7.1036531, 122.2352311],
+        [7.1025625, 122.2342348],
+        [7.1059604, 122.2391194],
+        [7.103175, 122.2339397],
+        [7.105837, 122.2358362],
+        [7.1069651, 122.2343341],
+        [7.1070672, 122.2390094],
+        [7.1032504, 122.2356879],
+        [7.1003806, 122.2337369],
+        [7.1001686, 122.2356908],
+        [7.1048151, 122.240071],
+        [7.1042209, 122.23504],
+        [7.1012815, 122.2339045],
+        [7.1061546, 122.2363396],
+        [7.1065343, 122.2388585],
+        [7.1101943, 122.2377896],
+        [7.1018617, 122.2395276],
+        [7.1041887, 122.2398028],
+        [7.102929, 122.2342736],
+        [7.1004878, 122.2388535],
+        [7.106141, 122.2383876],
+        [7.1025242, 122.2362787],
+        [7.1006623, 122.2340824],
+        [7.1044091, 122.2340449],
+        [7.1088932, 122.2364433],
+        [7.1088151, 122.2355603],
+        [7.1057364, 122.2372364],
+        [7.102656, 122.2362233],
+        [7.1049156, 122.2336925],
+        [7.1010222, 122.2340321],
+        [7.1057678, 122.2396675],
+        [7.0997767, 122.2370738],
+        [7.1059418, 122.2370712],
+      ]
+    },
+    {
+      name: 'Bolong District',
+      masterCoordinates: [[7.1044091, 122.2340449]],
+      additionalCoordinates: [
+        [7.100949, 122.2341997],
+        [7.1077309, 122.2351404],
+        [7.1098989, 122.2365135],
+        [7.109586, 122.2353185],
+        [7.1044862, 122.2398883],
+        [7.1070321, 122.2390386],
+        [7.1074868, 122.2374661],
+        [7.1036531, 122.2352311],
+        [7.1025625, 122.2342348],
+        [7.1059604, 122.2391194],
+        [7.103175, 122.2339397],
+        [7.105837, 122.2358362],
+        [7.1069651, 122.2343341],
+        [7.1070672, 122.2390094],
+        [7.1032504, 122.2356879],
+        [7.1003806, 122.2337369],
+        [7.1001686, 122.2356908],
+        [7.1048151, 122.240071],
+        [7.1042209, 122.23504],
+        [7.1012815, 122.2339045],
+        [7.1061546, 122.2363396],
+        [7.1065343, 122.2388585],
+        [7.1101943, 122.2377896],
+        [7.1018617, 122.2395276],
+        [7.1041887, 122.2398028],
+        [7.102929, 122.2342736],
+        [7.1004878, 122.2388535],
+        [7.106141, 122.2383876],
+        [7.1025242, 122.2362787],
+        [7.1006623, 122.2340824],
+        [7.1044091, 122.2340449],
+        [7.1088932, 122.2364433],
+        [7.1088151, 122.2355603],
+        [7.1057364, 122.2372364],
+        [7.102656, 122.2362233],
+        [7.1049156, 122.2336925],
+        [7.1010222, 122.2340321],
+        [7.1057678, 122.2396675],
+        [7.0997767, 122.2370738],
+        [7.1059418, 122.2370712],
+        [7.1071493, 122.2377716],
+        [7.1071493, 122.2377716],
+        [7.1054327, 122.2352141],
+        [7.1046869, 122.2397456],
+        [7.1009605, 122.2355407],
+        [7.0982609, 122.2383415],
+        [7.1092911, 122.2348419],
+        [7.1080616, 122.238209],
+        [7.1005605, 122.236705],
+        [7.1075116, 122.2374829],
+        [7.1007099, 122.239046],
+        [7.1030188, 122.2256105],
+        [7.103009, 122.226563],
+        [7.1042811, 122.2245278],
+        [7.1040544, 122.2242255],
+        [7.0975718, 122.2248403],
+        [7.0997567, 122.2259421],
+        [7.103619, 122.2274843],
+        [7.1011491, 122.2257209],
+        [7.0997284, 122.2259229],
+        [7.097435, 122.2245713],
+        [7.1030074, 122.2287408],
+        [7.1013972, 122.2263824],
+        [7.1042872, 122.2252567],
+        [7.1036824, 122.2271106],
+        [7.1012407, 122.2255667],
+        [7.1045574, 122.2273059],
+        [7.0968293, 122.2234334],
+        [7.1007579, 122.226118],
+        [7.1037246, 122.2251238],
+        [7.1032127, 122.2282243],
+        [7.1021394, 122.2267722],
+        [7.1036361, 122.2260129],
+        [7.1020352, 122.2267773],
+        [7.1032449, 122.2282533],
+      ]
     }
+  ];
 
- 
-      
-      
-       
-//ayala
-const coordinates1 = [
-    [6.962612, 121.957403],
-    [6.963518, 121.952942],
-    [6.963828, 121.953634],
-    [6.960466, 121.953829],
-    [6.964878, 121.958875],
-    [6.9648, 121.957938],
-    [6.965477, 121.960475],
-    [6.964825, 121.9599723],
-    [6.965538, 121.959663],
-    [6.970897, 121.960732],
-    [6.960203, 121.962074],
-    [6.961795, 121.95877],
-    [6.968231, 121.962136],
-    [6.971381, 121.96035],
-    [6.967591, 121.953692],
-    [6.96352, 121.963639],
-    [6.978943, 121.936932],
-    [6.980922, 121.935174],
-    [6.978391, 121.934411],
-    [6.975148, 121.9379],
-    [6.994362, 121.940397],
-    [6.98111, 121.937248],
-    [6.976435, 121.942473],
-    [6.976875, 121.943403],
-    [6.977755, 121.943267],
-    [6.976787, 121.941883],
-    [7.016884, 121.922146],
-    [6.999188, 121.9478],
-  ];
-  const descriptions1 = [
-    'Name: Mary Jane Amora, <br><br>Barangay: Ayala',
-    'Name: Pablo Acena, <br><br>Barangay: Ayala',
-    'Name: Jober Fernando, <br><br>Barangay: Ayala',
-    'Name: Joel Avcoy, <br><br>Barangay: Ayala',
-    'Name: Napoleon Rabulan, <br><br>Barangay: Tulungatung',
-    'Name: Edric Waton, <br><br>Barangay: Tulungatung',
-    'Name: Percival Torralba, <br><br>Barangay: Tulungatung',
-    'Name: Gilbert Hipolito, <br><br>Barangay: Tulungatung',
-    'Name: Jeffrey Hipolito, <br><br>Barangay: Tulungatung',
-    'Name: Oswaldo Francisco, <br><br>Barangay: Tulungatung',
-    'Name: Albert Agoo, <br><br>Barangay: Recodo',
-    'Name: Feliciano Ebol, <br><br>Barangay: Recodo',
-    'Name: Elvie Santos, <br><br>Barangay: Tulungatung',
-    'Name: Israel Santos, <br><br>Barangay: Tulungatung',
-    'Name: Rosano Rizada, <br><br>Barangay: Tulungatung',
-    'Name: Romeo Bugtai, <br><br>Barangay: Cawit',
-    'Name: Luicito Andres, <br><br>Barangay: Talisayan',
-    'Name: Crispino Sumblingo Jr., <br><br>Barangay: Talisayan',
-    'Name: Isperidion Bihiran, <br><br>Barangay: Talisayan',
-    'Name: Gaspar Enriquez, <br><br>Barangay: Talisayan',
-    'Name: Maynard Dinglasa, <br><br>Barangay: Talisayan',
-    'Name: Ralfhi Bernardo, <br><br>Barangay: Talisayan',
-    'Name: Leonardo Ebol, <br><br>Barangay: Talisayan',
-    'Name: Allen Moriedas, <br><br>Barangay: Talisayan',
-    'Name: Richard Dela Torre, <br><br>Barangay: Talisayan',
-    'Name: Ryan Umarga, <br><br>Barangay: Talisayan',
-    'Name: Nelly Lejouso, <br><br>Barangay: Talisayan',
-    'Name: Rico Saavedra, <br><br>Barangay: Pamucutan',
-  ];
-  
-  for (let i = 0; i < coordinates1.length; i++) {
-    const marker1 = L.marker(coordinates1[i], {
-      title: '',
+  const additionalMarkers = [];
+
+  function createDistrictMarkers(district) {
+    const { name, masterCoordinates, additionalCoordinates } = district;
+
+    const masterMarker = L.marker(masterCoordinates[0], {
+      title: name,
       opacity: 1.5,
-    }).addTo(mymap);
-    
-    const markerPopup1 = marker1.bindPopup(descriptions1[i]).openPopup();
+      icon: L.icon({
+        iconUrl: '../upload/pin.png',
+        iconSize: [50, 60],
+        iconheight:[29,45],          
+        iconAnchor: [20, 90],
+        popupAnchor: [40, 34]
+      })
+    }).addTo(map);
+
+    masterMarker.on('click', function(e) {
+      if (additionalMarkers.length === 0) {
+        additionalCoordinates.forEach(coordinate => {
+          const marker = L.marker(coordinate, {
+            title: '',
+            opacity: 1.5
+          }).addTo(map);
+
+          additionalMarkers.push(marker);
+
+          marker.on('click', function(e) {
+            const popup = L.popup()
+              .setLatLng(e.latlng)
+              .setContent('Popup Content for additionalCoordinates')
+              .openOn(map);
+          });
+        });
+      } else {
+        additionalMarkers.forEach(marker => map.removeLayer(marker));
+        additionalMarkers.length = 0;
+      }
+    });
   }
-//manicahan
-  const coordinates2 =[
-  [7.0277468, 122.1916938],
-  [7.0264131, 122.1916883],
-  [7.0278417, 122.1969116],
-  [7.0270209, 122.1992409],
-  [7.0258395, 122.1914175],
-  [7.0258467, 122.1919925],
-  [7.0281803, 122.1936666],
-  [7.0257487, 122.1992006],
-  [7.0276412, 122.1907373],
-  [7.0276835, 122.1940376],
-  [7.0256115, 122.1949751],
-  [7.0284182, 122.1927858],
-  [7.0272389, 122.1906995],
-  [7.0267005, 122.1957214],
-  [7.0269416, 122.1898006],
-  [7.0275498, 122.1905713],
-  [7.0250084, 122.1977179],
-  [7.0255155, 122.196101],
-  [7.0277927, 122.1918688],
-  [7.0283826, 122.1928424],
-  [7.0275433, 122.1898976],
-  [7.027684, 122.1912042],
-  [7.0264706, 122.1958649],
-  [7.0264652, 122.1980721],
-  [7.0259486, 122.1898619],
-  [7.02666, 122.1943318],
-  [7.0257078, 122.1906664],
-  [7.0273012, 122.195668],
-  [7.0262985, 122.1898262],
-  [7.0277053, 122.1914797],
-  [7.0275722, 122.1900962],
-  [7.02566, 122.1897296],
-  [7.0259558, 122.1944866],
-  [7.0280398, 122.191854],
-  [7.0246103, 122.2011931],
-  [7.0258267, 122.1991976],
-  [7.0279407, 122.1970312],
-  [7.0283927, 122.1974594],
-  [7.0250946, 122.1979214],
-];
 
-const descriptions2 = [
-    'Name: Albelardo Gaspar, <br><br>Barangay: Manicahan', 
-    'Name: Anthony Natividad, <br><br>Barangay: Manicahan',
-    'Name: Arlene Lavacanacruz, <br><br>Barangay: Manicahan',
-    'Name: Armando Salazar, <br><br>Barangay: Manicahan',
-    'Name: Christoper Araneta, <br><br>Barangay: Manicahan',
-    'Name: Crisencio Natividad, <br><br>Barangay: Manicahan',
-    'Name: Dexter Alvarez, <br><br>Barangay: Manicahan',
-    'Name: Dionisio Maquiling, <br><br>Barangay: Manicahan',
-    'Name: Donie Dane Limen, <br><br>Barangay: Manicahan',
-    'Name: Edwino Dela Cruz, <br><br>Barangay: Manicahan',
-    'Name: Elizabeth Dela Cruz, <br><br>Barangay: Manicahan',
-    'Name: Enrico Buenbraso, <br><br>Barangay: Manicahan',
-    'Name: Ernesto Sogradie, <br><br>Barangay: Manicahan',
-    'Name: Helen Enriquez, <br><br>Barangay: Manicahan',
-    'Name: Henry Ariola, <br><br>Barangay: Manicahan',
-    'Name: Helario Ramos Jr., <br><br>Barangay: Manicahan',
-    'Name: Jaime Falcasantos, <br><br>Barangay: Manicahan',
-    'Name: Joel Pilangga, <br><br>Barangay: Manicahan',
-    'Name: Jomarie Pilangga, <br><br>Barangay: Manicahan',
-    'Name: Jomel Enriquez, <br><br>Barangay: Manicahan',
-    'Name: Jose Sebastian, <br><br>Barangay: Manicahan',
-    'Name: Joseph Dela Cruz, <br><br>Barangay: Manicahan',
-    'Name: Joseph Francisco, <br><br>Barangay: Manicahan',
-    'Name: Krisbert Arcillas, <br><br>Barangay: Manicahan',
-    'Name: Lubin Ramis, <br><br>Barangay: Manicahan',
-    'Name: Noriel Salazar, <br><br>Barangay: Manicahan',
-    'Name: Odilon Dela Cruz, <br><br>Barangay: Manicahan',
-    'Name: Ofelia Araneta, <br><br>Barangay: Manicahan',
-    'Name: Felipe Falcasantos, <br><br>Barangay: Manicahan',
-    'Name: Reynante Almonia, <br><br>Barangay: Manicahan',
-    'Name: Ricky Jay Ramillano, <br><br>Barangay: Manicahan',
-    'Name: Rodelino Limen, <br><br>Barangay: Manicahan',
-    'Name: Rodelyn Alberto, <br><br>Barangay: Manicahan',
-    'Name: Roger Francisco, <br><br>Barangay: Manicahan',
-    'Name: Rolando Perez, <br><br>Barangay: Manicahan',
-    'Name: Romeo Ramis, <br><br>Barangay: Manicahan',
-    'Name: Romulo Natividad, <br><br>Barangay: Manicahan',
-    'Name: Rosendo Lavacanacruz, <br><br>Barangay: Manicahan',
-    'Name: Ruben Revilla, <br><br>Barangay: Manicahan',
-    'Name: Vandiola, <br><br>Barangay: Manicahan',
-  ];
-   
-  for (let i = 0; i < coordinates2.length; i++) {
-    const marker2 = L.marker(coordinates2[i], {
-      title: '',
-      opacity: 1.5,
-    }).addTo(mymap);
-    
-    const markerPopup2 = marker2.bindPopup(descriptions2[i]).openPopup();
-  }
-  
+  districtsData.forEach(district => createDistrictMarkers(district));
 
-  const coordinates3 = [
-[7.017962,	122.1849057],
-[7.0201911,	122.1867535],
-[7.0095571,	122.1871316],
-[7.0214148,	122.1853971],
-[7.0222296,	122.1877235],
-[7.0177795,	122.1852886],
-[7.0184864,	122.1843285],
-[7.0106703,	122.1867337],
-[7.0102231,	122.187946],
-[7.0222059,	122.1876731],
-[7.0214731,	122.1859948],
-[7.0214024,	122.1865264],
-[7.0106951,	122.1878787],
-[7.0116362,	122.1848414],
-[7.0140823,	122.1850348],
-[7.0219898,	122.1872227],
-[7.0219855,	122.1872309],
-[7.0177739,	122.1858139],
-[7.0177652,	122.1855441],
-[7.0108466,	122.1873462],
-[7.0187292,	122.1856008],
-[7.0121802,	122.1833145],
-[7.0128348,	122.1877822],
-[7.0125447,	122.1851874],
-[7.0109895,	122.1848042],,
-[7.0119804,	122.1845108],
-[7.0118518,	122.1834867],
-[7.0210464,	122.1855198],
-[7.02216,	122.187561],
-[7.0125169,	122.1832807],
-[7.012167	,122.1863018],
-[7.0196368,	122.1855175],
-[7.0183262,	122.1846522],
-[7.0220853,	122.1873916],
-[7.0105948,	122.1849108],
-[7.0123345,	122.1846037],
-[7.0113622,	122.1836622],
-[7.100949, 122.2341997],  
-[7.1077309, 122.2351404],
-[7.1098989, 122.2365135],
-[7.109586, 122.2353185],
-[7.1044862, 122.2398883],
-[7.1070321, 122.2390386],
-[7.1074868, 122.2374661],
-[7.1036531, 122.2352311],
-[7.1025625, 122.2342348],
-[7.1059604, 122.2391194],
-[7.103175, 122.2339397],
-[7.105837, 122.2358362],
-[7.1069651, 122.2343341],
-[7.1070672, 122.2390094],
-[7.1032504, 122.2356879],
-[7.1003806, 122.2337369],
-[7.1001686, 122.2356908],
-[7.1048151, 122.240071],
-[7.1042209, 122.23504],
-[7.1012815, 122.2339045],
-[7.1061546, 122.2363396],
-[7.1065343, 122.2388585],
-[7.1101943, 122.2377896],
-[7.1018617, 122.2395276],
-[7.1041887, 122.2398028],
-[7.102929, 122.2342736],
-[7.1004878, 122.2388535],
-[7.106141, 122.2383876],
-[7.1025242, 122.2362787],
-[7.1006623, 122.2340824],
-[7.1044091, 122.2340449],
-[7.1088932, 122.2364433],
-[7.1088151, 122.2355603],
-[7.1057364, 122.2372364],
-[7.102656, 122.2362233],
-[7.1049156, 122.2336925],
-[7.1010222, 122.2340321],
-[7.1057678, 122.2396675],
-[7.0997767, 122.2370738],
-[7.1059418, 122.2370712]
-  ];
-const descriptions3 = [
-'Name: ALEX MOLINA<br><br>Barangay: Manicahan',
-  'Name: ALFREDO APOLINARIO JR.<br><br>Barangay: Manicahan',
-  'Name: ALFREDO RAMOS<br><br>Barangay: Manicahan',
-  'Name: ALVIN VILLANUEVA<br><br>Barangay: Manicahan',
-  'Name: ANTONIO NATIVIDAD<br><br>Barangay: Manicahan',
-  'Name: BELARMINO VICENTE<br><br>Barangay: Manicahan',
-  'Name: CELIPA BAUGBO<br><br>Barangay: Manicahan',
-  'Name: DOMINICIANO MIGUEL<br><br>Barangay: Manicahan',
-  'Name: ELIZAR SANTIAGO<br><br>Barangay: Manicahan',
-  'Name: ERWIN CLEMENTE<br><br>Barangay: Manicahan',
-  'Name: EVANGELINE BUSTILLO<br><br>Barangay: Manicahan',
-  'Name: FERNANDO GENIO<br><br>Barangay: Manicahan',
-  'Name: GERTUDES CASTILLO<br><br>Barangay: Manicahan',
-  'Name: GRACE FALCASANTOS<br><br>Barangay: Manicahan',
-  'Name: HIPOLITA ALEJANDRO<br><br>Barangay: Manicahan',
-  'Name: JOSELITO APOLINARIO<br><br>Barangay: Manicahan',
-  'Name: JOSELITO RESOLA<br><br>Barangay: Manicahan',
-  'Name: JOSEPH FRANCSICO<br><br>Barangay: Manicahan',
-  'Name: JULIETA ALPICHE<br><br>Barangay: Manicahan',
-  'Name: JUN LADJAO<br><br>Barangay: Manicahan',
-  'Name: LORENZO NATIVIDAD JR.<br><br>Barangay: Manicahan',
-  'Name: MAYNARDO DELOSANTOS<br><br>Barangay: Manicahan',
-  'Name: NICANOR REBOLLOS<br><br>Barangay: Manicahan',
-  'Name: NOEL LATOZA<br><br>Barangay: Manicahan',
-  'Name: NORIEL CABAYACRUZ<br><br>Barangay: Manicahan',
-  'Name: OSCAR ANOVA<br><br>Barangay: Manicahan',
-  'Name: PEDRO PANGILINAN<br><br>Barangay: Manicahan',
-  'Name: BENITO RAMIREZ<br><br>Barangay: Manicahan',
-  'Name: RAMIRO DE LEON<br><br>Barangay: Manicahan',
-  'Name: RICHARD REBOLLOS<br><br>Barangay: Manicahan',
-  'Name: ROILY AGUSTIN<br><br>Barangay: Manicahan',
-  'Name: ROSALIO NATIVIDAD<br><br>Barangay: Manicahan',
-  'Name: ROSELITO APOLINARIO<br><br>Barangay: Manicahan',
-  'Name: TESSIE FRANCISCO<br><br>Barangay: Manicahan',
-  'Name: VINCENT EIJANSANTOS<br><br>Barangay: Manicahan',
-  'Name: VIVIAN RENDOL<br><br>Barangay: Manicahan',
-  'Name: YOLANDA VICENTE<br><br>Barangay: Manicahan'
-  ];
-  for (let i = 0; i < coordinates3.length; i++) {
-    const marker3 = L.marker(coordinates3[i], {
-      title: '',
-      opacity: 1.5,
-    }).addTo(mymap);
-    
-    const markerPopup3 = marker3.bindPopup(descriptions3[i]).openPopup();
+  map.on('click', function() {
+    additionalMarkers.forEach(marker => map.removeLayer(marker));
+    additionalMarkers.length = 0;
+  });
+
+  const searchControl = L.Control.geocoder({
+    defaultMarkGeocode: false
+  });
+
+  const searchContainer = L.DomUtil.create('div', 'search-container');
+  searchContainer.appendChild(searchControl.onAdd(map));
+  mapElement.appendChild(searchContainer);
+
+  searchControl.on('markgeocode', function(e) {
+    const { center } = e.geocode;
+    map.flyTo(center, 16, {
+      animate: true,
+      duration: 1.5
+    });
+
+    map.once('zoomend', function() {
+      L.marker(center).addTo(map);
+    });
+  });
 }
 
-const coordinates4 = [
-[7.100949, 122.2341997],  
-  [7.1077309, 122.2351404],
-  [7.1098989, 122.2365135],
-  [7.109586, 122.2353185],
-  [7.1044862, 122.2398883],
-  [7.1070321, 122.2390386],
-  [7.1074868, 122.2374661],
-  [7.1036531, 122.2352311],
-  [7.1025625, 122.2342348],
-  [7.1059604, 122.2391194],
-  [7.103175, 122.2339397],
-  [7.105837, 122.2358362],
-  [7.1069651, 122.2343341],
-  [7.1070672, 122.2390094],
-  [7.1032504, 122.2356879],
-  [7.1003806, 122.2337369],
-  [7.1001686, 122.2356908],
-  [7.1048151, 122.240071],
-  [7.1042209, 122.23504],
-  [7.1012815, 122.2339045],
-  [7.1061546, 122.2363396],
-  [7.1065343, 122.2388585],
-  [7.1101943, 122.2377896],
-  [7.1018617, 122.2395276],
-  [7.1041887, 122.2398028],
-  [7.102929, 122.2342736],
-  [7.1004878, 122.2388535],
-  [7.106141, 122.2383876],
-  [7.1025242, 122.2362787],
-  [7.1006623, 122.2340824],
-  [7.1044091, 122.2340449],
-  [7.1088932, 122.2364433],
-  [7.1088151, 122.2355603],
-  [7.1057364, 122.2372364],
-  [7.102656, 122.2362233],
-  [7.1049156, 122.2336925],
-  [7.1010222, 122.2340321],
-  [7.1057678, 122.2396675],
-  [7.0997767, 122.2370738],
-  [7.1059418, 122.2370712]
-];
-
-const descriptions4 = [
-    'Name: Agnes Cabato, <br><br>Barangay: Bolong',
-    'Name: Alvin Angeles Agustin, <br><br>Barangay: Bolong',
-    'Name: Angelo Reyes, <br><br>Barangay: Bolong',
-    'Name: Bernardita Mabanua, <br><br>Barangay: Bolong',
-    'Name: Christina Ordóñez, <br><br>Barangay: Bolong',
-    'Name: Danilo Macansantos, <br><br>Barangay: Bolong',
-    'Name: Dolores, <br><br>Barangay: Bolong',
-    'Name: Edison Alviar, <br><br>Barangay: Bolong',
-    'Name: Eduardo Alviar, <br><br>Barangay: Bolong',
-    'Name: Edwina Francisco, <br><br>Barangay: Bolong',
-    'Name: Elizabeth Alviar, <br><br>Barangay: Bolong',
-    'Name: Elmira Dagalea Gregorio, <br><br>Barangay: Bolong',
-    'Name: Elsa Macansantos, <br><br>Barangay: Bolong',
-    'Name: Emill Dayto, <br><br>Barangay: Bolong',
-    'Name: Ernie Cruz, <br><br>Barangay: Bolong',
-    'Name: Expedito Tarroza, <br><br>Barangay: Bolong',
-    'Name: Fe Salazar, <br><br>Barangay: Bolong',
-    'Name: Feliciaiana Tubio, <br><br>Barangay: Bolong',
-    'Name: Felipe Angeles, <br><br>Barangay: Bolong',
-    'Name: Ferdinand Dagalea, <br><br>Barangay: Bolong',
-    'Name: Ferndando Alvarez, <br><br>Barangay: Bolong',
-    'Name: Fernando del Prado, <br><br>Barangay: Bolong',
-    'Name: Inocente Gregorio, <br><br>Barangay: Bolong',
-    'Name: Joe Ocampo, <br><br>Barangay: Bolong',
-    'Name: Jomar Salazar, <br><br>Barangay: Bolong',
-    'Name: Jonard Dagalea, <br><br>Barangay: Bolong',
-    'Name: Laurence Benito, <br><br>Barangay: Bolong',
-    'Name: Lina Eijansantos, <br><br>Barangay: Bolong',
-    'Name: Luis Benito, <br><br>Barangay: Bolong',
-    'Name: Ma. Luz Vicente Saidi, <br><br>Barangay: Bolong',
-    'Name: Marcelino Evangelista, <br><br>Barangay: Bolong',
-    'Name: Michael Gregorio, <br><br>Barangay: Bolong',
-    'Name: Miguel Gregorio, <br><br>Barangay: Bolong',
-    'Name: Nestor Sta. Maria, <br><br>Barangay: Bolong',
-    'Name: Nestor Taragat, <br><br>Barangay: Bolong',
-    'Name: Noel Salomon, <br><br>Barangay: Bolong',
-    'Name: Nonito Ledesma, <br><br>Barangay: Bolong',
-    'Name: Noriel del Prado, <br><br>Barangay: Bolong',
-    'Name: Noriel Teves Dagalea, <br><br>Barangay: Bolong',
-    'Name: Oscar Lumido, <br><br>Barangay: Bolong'
-];
-    for (let i = 0; i < coordinates4.length; i++) {
-    const marker4 = L.marker(coordinates4[i], {
-      title: '',
-      opacity: 1.5,
-    }).addTo(mymap);
-    
-   const markerPopup4 = marker4.bindPopup(descriptions4[i]).openPopup();
-  }
-
-            // Add your marker and polyline code here
-
-            // Example marker
-            const marker = L.marker([6.962612, 121.957403], {
-                title: '',
-                opacity: 1.5,
-            }).addTo(mymap);
-
-            // Example marker popup
-            const markerPopup = marker.bindPopup("Hello, farmer!").openPopup();
-        }
     </script>
 </body>
 </html>

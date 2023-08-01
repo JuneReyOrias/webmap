@@ -22,13 +22,19 @@
        
         <li class="nav-item">
           <a href={{route('farmers.form.rice_map')}} class="nav-link">
-            <i class="link-icon" data-feather="calendar"></i>
+            <i class="link-icon" data-feather="map"></i>
             <span class="link-title">ZamboAgriMap</span>
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{route('personalinfo.index')}}"class="nav-link">
+            <i class="link-icon" data-feather="map"></i>
+            <span class="link-title">GMap</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="https://earth.google.com/web/@7.15493912,122.21738186,143.06466033a,158600.66482102d,30.00000001y,0h,0t,0r" class="nav-link">
-            <i class="link-icon" data-feather="calendar"></i>
+            <i class="link-icon" data-feather="map"></i>
             <span class="link-title">Google Earth</span>
           </a>
         </li>
@@ -45,7 +51,7 @@
                 <a href="" class="nav-link">Ayala</a>
               </li>
               <li class="nav-item">
-                <a href="pages/ui-components/alerts.html" class="nav-link">Tumaga</a>
+                <a href="" class="nav-link">Tumaga</a>
               </li>
               <li class="nav-item">
                 <a href="pages/ui-components/badges.html" class="nav-link">Culianan</a>
@@ -93,16 +99,16 @@
           <div class="collapse" id="forms">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="{{route('farmers.rice_farmersforms')}}" class="nav-link">RiceFarmerForms</a>
-              </li>
-             <!--- <li class="nav-item">
-                <a href="pages/forms/advanced-elements.html" class="nav-link">Advanced Elements</a>
+                <a href="{{route('farmers.rice_farmersforms')}}" class="nav-link">Rice Survey Form</a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">Editors</a>
+                <a href="" class="nav-link">Corn Survey Form</a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/wizard.html" class="nav-link">Wizard</a>
+                <a href="" class="nav-link">Survey Form</a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link"> Survey Form</a>
               </li>-->
             </ul>
           </div>
@@ -116,22 +122,26 @@
           <div class="collapse" id="charts">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="pages/charts/apex.html" class="nav-link">Apex</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">ChartJs</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">Flot</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/morrisjs.html" class="nav-link">Morris</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/peity.html" class="nav-link">Peity</a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/sparkline.html" class="nav-link">Sparkline</a>
+        
+                  <a href="pages/charts/apex.html" class="nav-link">Inbred</a>
+                </li>
+                <li class="nav-item">
+                  <a href="pages/charts/chartjs.html" class="nav-link">Hybrid</a>
+                </li>
+                <li class="nav-item">
+                  <a href="pages/charts/chartjs.html" class="nav-link">Jasmin Rice</a>
+                </li>
+                <li class="nav-item">
+                  <a href="pages/charts/flot.html" class="nav-link">Basmati Rice</a>
+                </li>
+                <li class="nav-item">
+                  <a href="pages/charts/morrisjs.html" class="nav-link">Brown</a>
+                </li>
+                <li class="nav-item">
+                  <a href="pages/charts/peity.html" class="nav-link">Glutinous rice</a>
+                </li>
+                <li class="nav-item">
+                  <a href="pages/charts/sparkline.html" class="nav-link"> Arborio rice</a>
               </li>
             </ul>
           </div>
@@ -162,10 +172,10 @@
           <div class="collapse" id="tables">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="pages/tables/basic-table.html" class="nav-link">Basic Tables</a>
+                <a href="pages/tables/basic-table.html" class="nav-link">Rice Crop Tables</a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data-table.html" class="nav-link">Data Table</a>
+                <a href="pages/tables/data-table.html" class="nav-link">Corn Table</a>
               </li>
             </ul>
           </div>
@@ -190,17 +200,17 @@
             </ul>
           </div>
         </li>
-        <li class="nav-item nav-category">Pages</li>
+        <li class="nav-item nav-category">Accounts</li>
         <li class="nav-item">
           <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" role="button" aria-expanded="false" aria-controls="general-pages">
             <i class="link-icon" data-feather="book"></i>
-            <span class="link-title">Special pages</span>
+            <span class="link-title">Agents/Technician</span>
             <i class="link-arrow" data-feather="chevron-down"></i>
           </a>
           <div class="collapse" id="general-pages">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="pages/general/blank-page.html" class="nav-link">Blank page</a>
+                <a href="pages/general/blank-page.html" class="nav-link">Users</a>
               </li>
               <li class="nav-item">
                 <a href="pages/general/faq.html" class="nav-link">Faq</a>
@@ -254,13 +264,13 @@
             </ul>
           </div>
         </li>
-        <li class="nav-item nav-category">Docs</li>
+        <!--<li class="nav-item nav-category">Docs</li>
         <li class="nav-item">
           <a href="https://www.nobleui.com/html/documentation/docs.html" target="_blank" class="nav-link">
             <i class="link-icon" data-feather="hash"></i>
             <span class="link-title">Documentation</span>
           </a>
-        </li>
+        </li>-->
       </ul>
     </div>
   </nav>

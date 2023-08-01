@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('categorize', function (Blueprint $table) {
             $table->id('categorize_id');
-            $table->foreignId('agri_sector')->unique();
+            $table->foreignId('agri_id')->unique();
             $table->string('name');
-            $table->string('type');            
-    
+                   
         });
     }
     

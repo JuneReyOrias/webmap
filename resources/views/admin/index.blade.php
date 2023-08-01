@@ -32,7 +32,7 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-baseline">
-                <h6 class="card-title mb-0">New Customers</h6>
+                <h6 class="card-title mb-0">New Farmers</h6>
                 <div class="dropdown mb-2">
                   <a type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -67,7 +67,7 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-baseline">
-                <h6 class="card-title mb-0">New Orders</h6>
+                <h6 class="card-title mb-0">Crops Yield</h6>
                 <div class="dropdown mb-2">
                   <a type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -102,7 +102,7 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between align-items-baseline">
-                <h6 class="card-title mb-0">Growth</h6>
+                <h6 class="card-title mb-0">Production Growth</h6>
                 <div class="dropdown mb-2">
                   <a type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -142,7 +142,7 @@
       <div class="card overflow-hidden">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-baseline mb-4 mb-md-3">
-            <h6 class="card-title mb-0">Revenue</h6>
+            <h6 class="card-title mb-0">Farmers Revenue</h6>
             <div class="dropdown">
               <a type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -158,12 +158,12 @@
           </div>
           <div class="row align-items-start">
             <div class="col-md-7">
-              <p class="text-muted tx-13 mb-3 mb-md-0">Revenue is the income that a business has from its normal business activities, usually from the sale of goods and services to customers.</p>
+              <p class="text-muted tx-13 mb-3 mb-md-0">Farmers Revenue  income usually from the sale of palay and rice.</p>
             </div>
             <div class="col-md-5 d-flex justify-content-md-end">
               <div class="btn-group mb-3 mb-md-0" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-outline-primary">Today</button>
-                <button type="button" class="btn btn-outline-primary d-none d-md-block">Week</button>
+                <!--<button type="button" class="btn btn-outline-primary">Today</button>
+                <button type="button" class="btn btn-outline-primary d-none d-md-block">Week</button>-->
                 <button type="button" class="btn btn-primary">Month</button>
                 <button type="button" class="btn btn-outline-primary">Year</button>
               </div>
@@ -180,7 +180,7 @@
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-baseline mb-2">
-            <h6 class="card-title mb-0">Monthly sales</h6>
+            <h6 class="card-title mb-0">Famers Yearly sales</h6>
             <div class="dropdown mb-2">
               <a type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -194,7 +194,7 @@
               </div>
             </div>
           </div>
-          <p class="text-muted">Sales are activities related to selling or the number of goods or services sold in a given time period.</p>
+          
           <div id="monthlySalesChart"></div>
         </div> 
       </div>
@@ -202,7 +202,7 @@
     <div class="col-lg-5 col-xl-4 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
-          <div class="d-flex justify-content-between align-items-baseline">
+         <!-- <div class="d-flex justify-content-between align-items-baseline">
             <h6 class="card-title mb-0">Cloud storage</h6>
             <div class="dropdown mb-2">
               <a type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -235,17 +235,17 @@
           <div class="d-grid">
             <button class="btn btn-primary">Upgrade storage</button>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
-  </div> <!-- row -->
+  </div>  
 
   <div class="row">
     <div class="col-lg-5 col-xl-4 grid-margin grid-margin-xl-0 stretch-card">
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-baseline mb-2">
-            <h6 class="card-title mb-0">Inbox</h6>
+            <h6 class="card-title mb-0">Active Agent</h6>
             <div class="dropdown mb-2">
               <a type="button" id="dropdownMenuButton6" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
@@ -328,7 +328,7 @@
       <div class="card">
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-baseline mb-2">
-            <h6 class="card-title mb-0">Projects</h6>
+            <h6 class="card-title mb-0">Task Updates of Agent</h6>
             <div class="dropdown mb-2">
               <a type="button" id="dropdownMenuButton7" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="icon-lg text-muted pb-3px" data-feather="more-horizontal"></i>
