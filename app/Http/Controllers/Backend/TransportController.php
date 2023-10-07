@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TransportRequest;
+use App\Models\Transport;
 use Illuminate\Http\Request;
 
 class TransportController extends Controller
@@ -14,7 +16,10 @@ class TransportController extends Controller
     {
         //
     }
-
+    public function TransportVar(){
+        $transport= Transport::all();
+    return view('variable_cost.transport.transport_store',compact('transport'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -26,9 +31,19 @@ class TransportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TransportRequest $request)
     {
-        //
+        try{
+            $data= $request->validated();
+            $data= $request->all();
+            Transport::create($data);
+    
+            return redirect('/variablecost/index')->with('message','transport data added successsfully');
+        
+        }
+        catch(\Exception $ex){
+            return redirect('/transport/store')->with('message','Someting went wrong');
+        }
     }
 
     /**

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalInformations extends Model
 {
     use HasFactory;
-
+ protected $table ='personal_informations';
+ protected $primarykey ='farmer_no';
     protected $guarded=[];
     public function FarmProfile(){
         return$this->hasOne(\app\FarmProfile::class);

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-
+use App\Models\FixedCost;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FixedCostRequest;
 use Illuminate\Http\Request;
 
 class FixedCostController extends Controller
@@ -14,7 +15,11 @@ class FixedCostController extends Controller
     {
         //
     }
-
+    
+    public function FixedForms(){
+        $fixed= FixedCost::all();
+    return view('fixed_cost.fixed_index',compact('fixed'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -26,9 +31,20 @@ class FixedCostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FixedCostRequest $request)
     {
-        //
+        try{
+        
+            $data= $request->validated();
+            $data= $request->all();
+            FixedCost::create($data);
+    
+            return redirect('/machineries/index')->with('message','Fixed Cost added successsfully');
+        
+        }
+        catch(\Exception $ex){
+            return redirect('/fixed/index')->with('message','Someting went wrong');
+        }
     }
 
     /**

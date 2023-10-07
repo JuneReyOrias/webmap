@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PesticidesRequest;
+use App\Models\Pesticide;
 use Illuminate\Http\Request;
 
 class PesticideController extends Controller
@@ -14,7 +16,10 @@ class PesticideController extends Controller
     {
         //
     }
-
+    public function PesticidesVar(){
+        $pesticides= Pesticide::all();
+    return view('variable_cost.pesticides.pesticides_store',compact('pesticides'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -26,9 +31,19 @@ class PesticideController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PesticidesRequest $request)
     {
-        //
+        try{
+            $data= $request->validated();
+            $data= $request->all();
+            Pesticide::create($data);
+    
+            return redirect('/transport/store')->with('message','Pesticides data added successsfully');
+        
+        }
+        catch(\Exception $ex){
+            return redirect('/pesticides/store')->with('message','Someting went wrong');
+        }
     }
 
     /**

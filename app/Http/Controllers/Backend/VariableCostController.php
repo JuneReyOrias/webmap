@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VariableCostRequest;
+use App\Models\VariableCost;
 use Illuminate\Http\Request;
 
 class VariableCostController extends Controller
@@ -14,7 +16,10 @@ class VariableCostController extends Controller
     {
         //
     }
-
+    public function VariableForms(){
+        $variablecost= VariableCost::all();
+    return view('variable_cost.variable_index',compact('variablecost'));
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -26,9 +31,22 @@ class VariableCostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(VariableCostRequest $request)
     {
-        //
+        {
+            try{
+            
+                $data= $request->validated();
+                $data= $request->all();
+               VariableCost::create($data);
+        
+                return redirect('/personalinfo/index')->with('message','Variable Cost added successsfully');
+            
+            }
+            catch(\Exception $ex){
+                return redirect('/variable/index')->with('message','Someting went wrong');
+            }
+        }
     }
 
     /**

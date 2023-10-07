@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FertilizerRequest;
+use App\Models\Fertilizer;
+use App\Models\Labor;
 use Illuminate\Http\Request;
 
 class FertilizerController extends Controller
@@ -22,13 +25,26 @@ class FertilizerController extends Controller
     {
         //
     }
-
+    public function FertilizersVar(){
+        $pesticides= Fertilizer::all();
+    return view('variable_cost.fertilizer.fertilizer_store',compact('pesticides'));
+    }
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FertilizerRequest $request)
     {
-        //
+        try{
+            $data= $request->validated();
+            $data= $request->all();
+            Fertilizer::create($data);
+    
+            return redirect('/pesticides/store')->with('message','Fertilizers data added successsfully');
+        
+        }
+        catch(\Exception $ex){
+            return redirect('/fertilizer/store')->with('message','Someting went wrong');
+        }
     }
 
     /**

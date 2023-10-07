@@ -20,33 +20,33 @@
           <h6 class="card-title"><span>IV.</span>machineries Used</h6>
 
          <p class="text-muted mb-3">Read the <a href="https://github.com/RobinHerbots/Inputmask" target="_blank"> Official Inputmask Documentation </a>for a full list of instructions and other options.</p>
-          <form class="forms-sample" >
+         <form  action{{url('machineries_useds')}} method="post"  >
             @csrf
             <div class="row mb-3">
              
               <div class="col-md-3">
 
                 <div class="form-floating mb-4 mb-md-0">
-                <input id="lastname" class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="Lastname"id="floatingInput">
-                <label for="floatingInput" >Particulars:</label>
+                <input id="lastname" class="form-control mb-4 mb-md-0" name="plowing_machineries_used" placeholder="Lastname" type="text" aria-label="Lastname"id="floatingInput">
+                <label for="floatingInput" >Plowing Machineries used:</label>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-floating mb-4 mb-md-0">
-              <input id="lastname" class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="ExtensionName"id="floatingInput">
-              <label for="floatingInput" >No. of Has:</label>
+              <input id="lastname" class="form-control mb-4 mb-md-0" name="plo_ownership_status" placeholder="Lastname" type="text" aria-label="ExtensionName"id="floatingInput">
+              <label for="floatingInput" >Ownership Status:</label>
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-floating mb-4 mb-md-0">
-            <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-            <label for="floatingInput" >Cost/Has(has):</label>
+            <input  class="form-control mb-4 mb-md-0" name="no_of_plowing" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+            <label for="floatingInput" >No. of Plowing:</label>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-          <label for="floatingInput" >Total Amount(P):</label>
+          <input  class="form-control mb-4 mb-md-0" name="plowing_cost" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+          <label for="floatingInput" >Plowing Cost:</label>
         </div>
       </div>
               </div>
@@ -54,31 +54,28 @@
             <div class="row mb-3">
               <div class="col-md-3">
                 <div class="form-floating mb-4 mb-md-0">
-                <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-                <label for="floatingInput" >Home Address:</label>
+                <input  class="form-control mb-4 mb-md-0" name="harrowing_machineries_used" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+                <label for="floatingInput" >Harrowing Machineries Used:</label>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-floating mb-4 mb-md-0">
-                <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
-                  <option selected disabled>Select</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-              <label for="floatingInput" >Sex:</label>
+                <input  class="form-control mb-4 mb-md-0" name="harro_ownership_status" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+                <label for="floatingInput" > Ownership Status:</label>
+              
             </div>
           </div>
                 <div class="col-md-3">
                   <div class="form-floating mb-4 mb-md-0">
-                  <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-                  <label for="floatingInput" >Religion:</label>
+                  <input  class="form-control mb-4 mb-md-0" name="no_of_harrowing" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+                  <label for="floatingInput" >No. of Harrowing:</label>
                 </div>
               </div>
            
             <div class="col-md-3">
               <div class="form-floating mb-4 mb-md-0">
-              <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="date" aria-label="MiddlName"id="floatingInput">
-              <label for="floatingInput" >Date of Birth:</label>
+                <input  class="form-control mb-4 mb-md-0" name="harrowing_cost" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+                <label for="floatingInput" > Harrowing Cost:</label>
             </div>
           </div>
         </div>
@@ -86,133 +83,53 @@
         <div class="row mb-3">
           <div class="col-md-3">
             <div class="form-floating mb-4 mb-md-0">
-            <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-            <label for="floatingInput" >Place of Birth:</label>
+            <input  class="form-control mb-4 mb-md-0" name="harvesting_machineries_used" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+            <label for="floatingInput" >Harvesting Machineries Used:</label>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-          <label for="floatingInput" >Contact No.:</label>
+          <input  class="form-control mb-4 mb-md-0" name="harvest_ownership_status" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+          <label for="floatingInput" > Ownership Status:</label>
         </div>
       </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-            <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
-              <option selected disabled>Select</option>
-              <option>Single</option>
-              <option>Maried</option>
-              <option>Divorced</option>
-              <option>Widowed</option>
-            </select>
-          <label for="floatingInput" >Civil Status:</label>
+            <input  class="form-control mb-4 mb-md-0" name="harvesting_cost" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+            <label for="floatingInput" >Harvesting Cost:</label>
         </div>
       </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-          <label for="floatingInput" >Name Of LegalSpouse:</label>
+          <input  class="form-control mb-4 mb-md-0" name="postharvest_machineries_used" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+          <label for="floatingInput" >Post Machineries Used:</label>
         </div>
       </div>
     </div>
             <div class="row mb-3">
           <div class="col-md-3">
             <div class="form-floating mb-4 mb-md-0">
-            <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-            <label for="floatingInput" >No.of Children:</label>
+            <input  class="form-control mb-4 mb-md-0" name="postharv_ownership_status" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+            <label for="floatingInput" >Machine Ownership Status:</label>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-          <label for="floatingInput" >Mother's maiden Name:</label>
+          <input  class="form-control mb-4 mb-md-0" name="post_harvest_cost" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+          <label for="floatingInput" >PostHarvest Cost:</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-floating mb-4 mb-md-0">
-        <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-        <label for="floatingInput" >Highest Formal Education:</label>
+        <input  class="form-control mb-4 mb-md-0" name="total_cost_for_machineries" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+        <label for="floatingInput" >Total Cost for Machineries:</label>
       </div>
     </div>
-        <div class="col-md-3">
-          <div class="form-floating mb-4 mb-md-0">
-            <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
-              <option selected disabled>Select</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          <label for="floatingInput" >Person with Disability:</label>
-        </div>
-      </div>
-     
-  </div>
-  <div class="row mb-3">
-    <div class="col-md-3">
-      <div class="form-floating mb-4 mb-md-0">
-      <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-      <label for="floatingInput" >PWD ID No.::</label>
-    </div>
-  </div>
-
-  <div class="col-md-3">
-    <div class="form-floating mb-4 mb-md-0">
-      <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
-        <option selected disabled>Select</option>
-        <option>Yes</option>
-        <option>No</option>
-      </select>
-    <label for="floatingInput" >Government Issued ID:</label>
-  </div>
-</div>
-<div class="col-md-3">
-  <div class="form-floating mb-4 mb-md-0">
-  <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-  <label for="floatingInput" >ID Type:</label>
-</div>
-</div>
-<div class="col-md-3">
-<div class="form-floating mb-4 mb-md-0">
-<input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-<label for="floatingInput" >ID No.:</label>
-</div>
-</div>
-
-</div>
-<div class="row mb-3">
-
-<div class="col-md-3">
-  <div class="form-floating mb-4 mb-md-0">
-    <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
-      <option selected disabled>Select</option>
-      <option>Yes</option>
-      <option>No</option>
-    </select>
-  <label for="floatingInput" >Members in any farmers Ass/Org/Coop:</label>
-</div>
-</div>
-<div class="col-md-3">
-  <div class="form-floating mb-4 mb-md-0">
-  <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-  <label for="floatingInput" >If yes,please specify:</label>
-</div>
-</div>
-<div class="col-md-3">
-<div class="form-floating mb-4 mb-md-0">
-<input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-<label for="floatingInput" >Name of Contact Person:</label>
-</div>
-</div>
-<div class="col-md-3">
-<div class="form-floating mb-4 mb-md-0">
-<input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-<label for="floatingInput" >Cellphone/Tel.no.:</label>
-</div>
-</div>
-
+       
 </div>
 <div  class="d-grid gap-2 d-md-flex justify-content-md-end">
   <a  href="{{route('fixed_cost.index')}}"button  class="btn btn-success me-md-2">Back</button></a></p>
-  <a  href="{{route('variable_cost.index')}}"button  class="btn btn-success me-md-2">Next</button></a></p>
+  <button  type="submit" class="btn btn-success me-md-2">Next</button></a></p>
           </form>
        
         </div>

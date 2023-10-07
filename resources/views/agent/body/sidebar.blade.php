@@ -21,7 +21,7 @@
       <li class="nav-item nav-category">Maps</li>
      
       <li class="nav-item">
-        <a href={{route('farmers.form.rice_map')}} class="nav-link">
+        <a href="" class="nav-link">
           <i class="link-icon" data-feather="calendar"></i>
           <span class="link-title">ZamboAgriMap</span>
         </a>
@@ -93,7 +93,7 @@
         <div class="collapse" id="forms">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{route('farmers.rice_farmersforms')}}" class="nav-link">RiceFarmerForms</a>
+              <a href="" class="nav-link">RiceFarmerForms</a>
             </li>
            <!--- <li class="nav-item">
               <a href="pages/forms/advanced-elements.html" class="nav-link">Advanced Elements</a>

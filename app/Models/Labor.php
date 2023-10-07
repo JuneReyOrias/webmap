@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Labor extends Model
 {
     use HasFactory;
-    
+    protected $guarded=[];
     public function VariableCost(){
         return$this->hasOne(\app\VariableCost::class);
     }

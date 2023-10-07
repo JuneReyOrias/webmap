@@ -10,43 +10,55 @@
     </ol>
   </nav>
   <div class="progress mb-3">
-    <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75% Complete</div>
+    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70% Complete</div>
 
   </div>
   <div class="row">
     <div class="col-md-12 grid-margin">
       <div class="card">
+        @if($errors->any())
+        <ul class="alert alert-warning">
+          @foreach ($errors->all() as $error)
+          <li>{{$error}}</li>
+          @endforeach
+        </ul>
+        @endif
         <div class="card-body">
-          <h6 class="card-title"><span>VI.</span>Last Production Data</h6>
+          <h6 class="card-title"><span>V.</span>Last Production Data</h6>
 
          <p class="text-muted mb-3">Read the <a href="https://github.com/RobinHerbots/Inputmask" target="_blank"> Official Inputmask Documentation </a>for a full list of instructions and other options.</p>
-          <form class="forms-sample" >
+         <form  action{{url('last_production_datas')}} method="post"  >
             @csrf
             <div class="row mb-3">
              
               <div class="col-md-3">
 
                 <div class="form-floating mb-4 mb-md-0">
-                <input id="lastname" class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="Lastname"id="floatingInput">
+                <input id="lastname" class="form-control mb-4 mb-md-0" name="seeds_typed_used" placeholder="Lastname" type="text" aria-label="Lastname"id="floatingInput">
                 <label for="floatingInput" >Seed Type used:</label>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-floating mb-4 mb-md-0">
-              <input id="lastname" class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="ExtensionName"id="floatingInput">
+              <input id="lastname" class="form-control mb-4 mb-md-0" name="seeds_used_in_kg" placeholder="Lastname" type="text" aria-label="ExtensionName"id="floatingInput">
               <label for="floatingInput" >Seeds in kgs/bag used:</label>
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-floating mb-4 mb-md-0">
-            <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-            <label for="floatingInput" >Cost/Has(has):</label>
+              <select class="form-select mb-4 mb-md-0" name="seed_source"id="floatingSelect" aria-label="Floating label select e">
+                <option selected disabled>Select</option>
+                <option>Government Subsidy</option>
+                <option>Traders</option>
+                <option>Own</option>
+              </select> 
+            <label for="floatingInput" >RSBA Registered:</label>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-          <label for="floatingInput" >Total Amount(P):</label>
+          <input  class="form-control mb-4 mb-md-0" name="no_of_fertilizer_used_in_bags" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+          <label for="floatingInput" >  No. of fertilizer used in bags:</label>
         </div>
       </div>
               </div>
@@ -54,31 +66,27 @@
             <div class="row mb-3">
               <div class="col-md-3">
                 <div class="form-floating mb-4 mb-md-0">
-                <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-                <label for="floatingInput" >Home Address:</label>
+                <input  class="form-control mb-4 mb-md-0" name="no_of_pesticides_used_in_l_per_kg" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+                <label for="floatingInput" >No. of pesticides used in l per kg:</label>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-floating mb-4 mb-md-0">
-                <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
-                  <option selected disabled>Select</option>
-                  <option>Male</option>
-                  <option>Female</option>
-                </select>
-              <label for="floatingInput" >Sex:</label>
+                <input  class="form-control mb-4 mb-md-0" name="no_of_insecticides_used_in_l" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+                <label for="floatingInput" >No. of insecticides used in l:</label>
             </div>
           </div>
                 <div class="col-md-3">
                   <div class="form-floating mb-4 mb-md-0">
-                  <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-                  <label for="floatingInput" >Religion:</label>
+                  <input  class="form-control mb-4 mb-md-0" name="area_planted" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+                  <label for="floatingInput" >Area planted:</label>
                 </div>
               </div>
            
             <div class="col-md-3">
               <div class="form-floating mb-4 mb-md-0">
-              <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="date" aria-label="MiddlName"id="floatingInput">
-              <label for="floatingInput" >Date of Birth:</label>
+              <input  class="form-control mb-4 mb-md-0" name="date_planted" placeholder="Lastname" type="date" aria-label="MiddlName"id="floatingInput">
+              <label for="floatingInput" >date_planted:</label>
             </div>
           </div>
         </div>
@@ -86,75 +94,69 @@
         <div class="row mb-3">
           <div class="col-md-3">
             <div class="form-floating mb-4 mb-md-0">
-            <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-            <label for="floatingInput" >Place of Birth:</label>
+            <input  class="form-control mb-4 mb-md-0" name="date_harvested" placeholder="Lastname" type="date" aria-label="MiddlName"id="floatingInput">
+            <label for="floatingInput" >Date Harvested:</label>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-          <label for="floatingInput" >Contact No.:</label>
+          <input  class="form-control mb-4 mb-md-0" name="yield_tons_per_kg" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+          <label for="floatingInput" >Yield (tons/kg):</label>
         </div>
       </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-            <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
-              <option selected disabled>Select</option>
-              <option>Single</option>
-              <option>Maried</option>
-              <option>Divorced</option>
-              <option>Widowed</option>
-            </select>
-          <label for="floatingInput" >Civil Status:</label>
+            <input  class="form-control mb-4 mb-md-0" name="unit_price_palay_per_kg" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+            <label for="floatingInput" >Unit price palay per kg:</label>
         </div>
       </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-          <label for="floatingInput" >Name Of LegalSpouse:</label>
+          <input  class="form-control mb-4 mb-md-0" name="unit_price_rice_per_kg" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+          <label for="floatingInput" >Unit price rice per kg:</label>
         </div>
       </div>
     </div>
             <div class="row mb-3">
           <div class="col-md-3">
             <div class="form-floating mb-4 mb-md-0">
-            <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-            <label for="floatingInput" >No.of Children:</label>
+              <input  class="form-control mb-4 mb-md-0" name="type_of_product" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+              <label for="floatingInput" >Type of product:</label>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-          <label for="floatingInput" >Mother's maiden Name:</label>
+            <select class="form-select mb-4 mb-md-0" name="sold_to"id="floatingSelect" aria-label="Floating label select e">
+              <option selected disabled>Select</option>
+              <option>Palay</option>
+              <option>Rice</option>
+            </select>
+          <label for="floatingInput" >Sold To:</label>
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-floating mb-4 mb-md-0">
-        <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-        <label for="floatingInput" >Highest Formal Education:</label>
+        <input  class="form-control mb-4 mb-md-0" name="if_palay_milled_where" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+        <label for="floatingInput" >If palay milled where?:</label>
       </div>
     </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-            <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
-              <option selected disabled>Select</option>
-              <option>Yes</option>
-              <option>No</option>
-            </select>
-          <label for="floatingInput" >Person with Disability:</label>
+            <input  class="form-control mb-4 mb-md-0" name="gross_income_palay" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+      <label for="floatingInput" >Gross Income (Palay)</label>
         </div>
       </div>
      
   </div>
-  <div class="row mb-3">
+   <div class="row mb-3">
     <div class="col-md-3">
       <div class="form-floating mb-4 mb-md-0">
-      <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
-      <label for="floatingInput" >PWD ID No.::</label>
+      <input  class="form-control mb-4 mb-md-0" name="gross_income_rice" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+      <label for="floatingInput" >Gross Income (Rice):</label>
     </div>
   </div>
 
-  <div class="col-md-3">
+  {{-- <div class="col-md-3">
     <div class="form-floating mb-4 mb-md-0">
       <select class="form-select mb-4 mb-md-0" name="age_select"id="floatingSelect" aria-label="Floating label select e">
         <option selected disabled>Select</option>
@@ -206,13 +208,13 @@
 <div class="form-floating mb-4 mb-md-0">
 <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
 <label for="floatingInput" >Cellphone/Tel.no.:</label>
-</div>
-</div>
+</div> --}}
+{{-- </div>  --}}
 
 </div>
 <div  class="d-grid gap-2 d-md-flex justify-content-md-end">
   <a  href="{{route('farm_profile.index')}}"button  class="btn btn-success me-md-2">Back</button></a></p>
-  <a  href="{{route('variable_cost.index')}}"button  class="btn btn-success me-md-2">Next</button></a></p>
+  <button  type="submit" class="btn btn-success me-md-2">Next</button></a></p>
           </form>
        
         </div>

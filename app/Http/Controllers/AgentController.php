@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 class AgentController extends Controller
 {
     public function AgentDashboard(){
-        return view('agent.agent_dashboard');
+        return view('agent.agent_index');
     }
     public function AgentLogout(Request $request)
     {

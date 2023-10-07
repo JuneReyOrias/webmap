@@ -2,81 +2,94 @@
 
 namespace App\Http\Controllers\Backend;
 use App\Models\PersonalInformations;
+use App\Models\MultipleFile;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PersonalInformationsRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 class PersonalInformationsController extends Controller
 {
+
+
+    // public function MultiFile(){
+       
+    //     return view('multifile.import');
+    // }
+    // public function saveUploadForm(Request $request){
+    //     dd($request->file('upload_file'));
+    // }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function ArcMap()
     {
      $personalInformations= PersonalInformations::all();
-     return view('personalinfo.index',compact('personalInformations'));
+     return view('map.arcmap',compact('personalInformations'));
     }
-    public function FarmForm(){
-        $farm= PersonalInformations::all();
-    return view('farm_profile.farm_index',compact('farm'));
+    public function Gmap()
+    {
+     $personalInformations= PersonalInformations::all();
+     return view('map.gmap',compact('personalInformations'));
     }
+    public function PersonalInfo(): View
+    {
+        $personalInformation= PersonalInformations::all();
+    return view('personalinfo.index',compact('personalInformation'));
+    }
+   
 
-    public function FixedForms(){
-        $fixed= PersonalInformations::all();
-    return view('fixed_cost.fixed_index',compact('fixed'));
+    public function PersonalInfoCrud():View{
+        $personalInformation= PersonalInformations::latest()->get();
+        return view('personalinfo.create',compact('personalInformation'));
     }
-    public function MachineForms(){
-        $fixed= PersonalInformations::all();
-    return view('machineries_used.machine_index',compact('fixed'));
-    }
-
-    public function ProductionForms(){
-        $fixed= PersonalInformations::all();
-    return view('production_data.production_index',compact('fixed'));
-    }
-
-    public function VariableForms(){
-        $fixed= PersonalInformations::all();
-    return view('variable_cost.variable_index',compact('fixed'));
-    }
-    public function RiceFarmers(){
-        $forms= PersonalInformations::latest()->get();
-        return view('farmers.form.rice_farmersforms',compact('forms'));
-    }
-    public function RiceMap(){
-        $maps= PersonalInformations::latest()->get();
-        return view('farmers.form.rice_map',compact('maps'));
-    }
+    // public function RiceMap(){
+    //     $maps= PersonalInformations::latest()->get();
+    //     return view('farmers.form.rice_map',compact('maps'));
+    // }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('personalinfo.index');
-    }
+    // public function create()
+    // {
+    //     return view('personalinfo.index');
+    // }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    { $validatedData = $request->validate([
-        'name' => 'required',
-        'address' => 'required',
-        // Add other fields as per your requirement
+    public function store(PersonalInformationsRequest $request): RedirectResponse
+    {
+        // PersonalInformations::create($request->all());
+         
+        // return redirect()->route('personalinfo.index')
+        //                 ->with('success','Product created successfully.');
+    try{
+        
+        $data= $request->validated();
+        $data= $request->all();
+        PersonalInformations::create($data);
 
-      
-    ]);
-    PersonalInformations:: create($validatedData);
-    return redirect()->route('personalinfo.index')->with('success', 'Personal Information created successfully');
+        return redirect('/farm/index')->with('message','Personal informations added successsfully');
+    
+    }
+    catch(\Exception $ex){
+        return redirect('/personalinfo/index')->with('message','Someting went wrong');
+    }
+
+    
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): View
     {
-        $personalInformation = PersonalInformations::findOrFail($id);
-        return view('personal_information.show', compact('personalInformations'));
+        $personalInformation = PersonalInformations::find($id);
+        return view('personalinfo.create')->with('personalInformation',$personalInformation);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -84,7 +97,7 @@ class PersonalInformationsController extends Controller
     public function edit(string $id)
     {
         $personalInformation = PersonalInformations::findOrFail($id);
-        return view('personal_information.edit', compact('personalInformation'));
+        return view('personalinfo.edit', compact('personalInformation'));
     
     }
 
@@ -93,15 +106,10 @@ class PersonalInformationsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            // Add other fields as per your requirement
-        ]);
-        $personalInformation = PersonalInformations::findOrFail($id);
-        $personalInformation->update($validatedData);
-        return redirect()->route('personal_information.index')->with('success', 'Personal Information updated successfully');
-   
+        $personalInformation = PersonalInformations::find($id);
+        $input = $request->all();
+        $personalInformation->update($input);
+        return redirect('personalInformation')->with('flash_message', 'personalInformation Updated!'); 
     }
 
     /**

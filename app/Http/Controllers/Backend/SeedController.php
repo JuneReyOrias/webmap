@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SeedRequest;
+use App\Models\Seed;
 use Illuminate\Http\Request;
 
 class SeedController extends Controller
@@ -14,7 +16,11 @@ class SeedController extends Controller
     {
         //
     }
-
+    public function SeedsVar(){
+        $pesticides= Seed::all();
+    return view('variable_cost.seeds.seeds_store',compact('pesticides'));
+    }
+    /*
     /**
      * Show the form for creating a new resource.
      */
@@ -26,9 +32,19 @@ class SeedController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SeedRequest $request)
     {
-        //
+        try{
+            $data= $request->validated();
+            $data= $request->all();
+            Seed::create($data);
+    
+            return redirect('labor/store')->with('message','Seeds data added successsfully');
+        
+        }
+        catch(\Exception $ex){
+            return redirect('/seeds/store')->with('message','Someting went wrong');
+        }
     }
 
     /**

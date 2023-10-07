@@ -20,38 +20,38 @@
           <h6 class="card-title"><span>III.</span>Fixed Cost</h6>
 
          <p class="text-muted mb-3">Read the <a href="https://github.com/RobinHerbots/Inputmask" target="_blank"> Official Inputmask Documentation </a>for a full list of instructions and other options.</p>
-          <form class="forms-sample" >
+         <form  action{{url('fixed_costs')}} method="post"  >
             @csrf
             <div class="row mb-3">
              
               <div class="col-md-3">
 
                 <div class="form-floating mb-4 mb-md-0">
-                <input id="lastname" class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="Lastname"id="floatingInput">
+                <input id="lastname" class="form-control mb-4 mb-md-0" name="particular" placeholder="Lastname" type="text" aria-label="Lastname"id="floatingInput">
                 <label for="floatingInput" >Particulars:</label>
               </div>
             </div>
             <div class="col-md-3">
               <div class="form-floating mb-4 mb-md-0">
-              <input id="lastname" class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="ExtensionName"id="floatingInput">
+              <input id="lastname" class="form-control mb-4 mb-md-0" name="no_of_ha" placeholder="Lastname" type="text" aria-label="ExtensionName"id="floatingInput">
               <label for="floatingInput" >No. of Has:</label>
             </div>
           </div>
           <div class="col-md-3">
             <div class="form-floating mb-4 mb-md-0">
-            <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+            <input  class="form-control mb-4 mb-md-0" name="cost_per_ha" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
             <label for="floatingInput" >Cost/Has(has):</label>
           </div>
         </div>
         <div class="col-md-3">
           <div class="form-floating mb-4 mb-md-0">
-          <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
+          <input  class="form-control mb-4 mb-md-0" name="total_amount" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
           <label for="floatingInput" >Total Amount(P):</label>
         </div>
       </div>
               </div>
   
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
               <div class="col-md-3">
                 <div class="form-floating mb-4 mb-md-0">
                 <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
@@ -207,12 +207,12 @@
 <input  class="form-control mb-4 mb-md-0" placeholder="Lastname" type="text" aria-label="MiddlName"id="floatingInput">
 <label for="floatingInput" >Cellphone/Tel.no.:</label>
 </div>
-</div>
+</div> --}}
 
 </div>
 <div  class="d-grid gap-2 d-md-flex justify-content-md-end">
   <a  href="{{route('farm_profile.index')}}"button  class="btn btn-success me-md-2">Back</button></a></p>
-  <a  href="{{route('machineries_used.index')}}"button  class="btn btn-success me-md-2">Next</button></a></p>
+  <button  type="submit" class="btn btn-success me-md-2">Next</button></a></p>
           </form>
        
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 use App\Models\FarmProfile;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FarmProfileRequest;
 use Illuminate\Http\Request;
 
 class FarmProfileController extends Controller
@@ -14,9 +15,9 @@ class FarmProfileController extends Controller
     {
         //
     }
- public function FarmForm(){
-    //$farmProfile= FarmProfile::all();
-    //return view('farm_profile.farm_index',compact('farmProfile'));
+    public function FarmProfile(){
+        $farmprofile= FarmProfile::all();
+    return view('farm_profile.farm_index',compact('farmprofile'));
  }
     /**
      * Show the form for creating a new resource.
@@ -29,9 +30,20 @@ class FarmProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FarmProfileRequest $request)
     {
-        //
+        try{
+        
+            $data= $request->validated();
+            $data= $request->all();
+            FarmProfile::create($data);
+    
+            return redirect('/fixed/index')->with('message','Personal informations added successsfully');
+        
+        }
+        catch(\Exception $ex){
+            return redirect('/farm/index')->with('message','Someting went wrong');
+        }
     }
 
     /**
