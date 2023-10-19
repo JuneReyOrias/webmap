@@ -39,11 +39,11 @@ class SeedController extends Controller
             $data= $request->all();
             Seed::create($data);
     
-            return redirect('labor/store')->with('message','Seeds data added successsfully');
+            return redirect('labor')->with('message','Seeds data added successsfully');
         
         }
         catch(\Exception $ex){
-            return redirect('/seeds/store')->with('message','Someting went wrong');
+            return redirect('/seeds')->with('message','Someting went wrong');
         }
     }
 

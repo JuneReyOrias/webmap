@@ -38,11 +38,11 @@ class TransportController extends Controller
             $data= $request->all();
             Transport::create($data);
     
-            return redirect('/variablecost/index')->with('message','transport data added successsfully');
+            return redirect('/variablecost')->with('message','transport data added successsfully');
         
         }
         catch(\Exception $ex){
-            return redirect('/transport/store')->with('message','Someting went wrong');
+            return redirect('/transport')->with('message','Someting went wrong');
         }
     }
 

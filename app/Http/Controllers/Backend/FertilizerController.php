@@ -39,11 +39,11 @@ class FertilizerController extends Controller
             $data= $request->all();
             Fertilizer::create($data);
     
-            return redirect('/pesticides/store')->with('message','Fertilizers data added successsfully');
+            return redirect('/pesticides')->with('message','Fertilizers data added successsfully');
         
         }
         catch(\Exception $ex){
-            return redirect('/fertilizer/store')->with('message','Someting went wrong');
+            return redirect('/fertilizer')->with('message','Someting went wrong');
         }
     }
 

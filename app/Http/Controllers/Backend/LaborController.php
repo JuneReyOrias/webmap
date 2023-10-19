@@ -38,11 +38,11 @@ class LaborController extends Controller
             $data= $request->all();
             Labor::create($data);
     
-            return redirect('/fertilizer/store')->with('message','Labors data added successsfully');
+            return redirect('/fertilizer')->with('message','Labors data added successsfully');
         
         }
         catch(\Exception $ex){
-            return redirect('/labor/store')->with('message','Someting went wrong');
+            return redirect('/labor')->with('message','Someting went wrong');
         }
     }
 

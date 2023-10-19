@@ -29,7 +29,7 @@
         <li class="nav-item">
           <a href="{{route('map.gmap')}}"class="nav-link">
             <i class="link-icon" data-feather="map"></i>
-            <span class="link-title">GMap</span>
+            <span class="link-title">Agri-Map</span>
           </a>
         </li>
         {{-- <li class="nav-item">
@@ -108,7 +108,19 @@
                 <a href="{{route('personalinfo.create')}}" class="nav-link">Personal Informations Crud</a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link"> Farm Profile Crud</a>
+                <a href="{{route('farm_profile.show')}}" class="nav-link">Farm Profile Crud</a>
+            </li>
+              <li class="nav-item">
+                <a href="{{route('fixed_cost.create')}}" class="nav-link">Fixed Cost Crud</a>
+              </li> 
+              <li class="nav-item">
+                <a href="{{route('machineries_used.create')}}" class="nav-link">Machineries Used Crud</a>
+              </li> 
+              <li class="nav-item">
+                <a href="{{route('production_data.create')}}" class="nav-link">Last Production Data Crud</a>
+              </li> 
+                <li class="nav-item">
+                <a href="{{route('kml.import')}}" class="nav-link">Kml Import</a>
               </li>
             </ul>
           </div>

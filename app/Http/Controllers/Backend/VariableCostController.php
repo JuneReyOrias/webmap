@@ -40,11 +40,11 @@ class VariableCostController extends Controller
                 $data= $request->all();
                VariableCost::create($data);
         
-                return redirect('/personalinfo/index')->with('message','Variable Cost added successsfully');
+                return redirect('/personalinfo/create')->with('message','Variable Cost added successsfully');
             
             }
             catch(\Exception $ex){
-                return redirect('/variable/index')->with('message','Someting went wrong');
+                return redirect('/variable')->with('message','Someting went wrong');
             }
         }
     }

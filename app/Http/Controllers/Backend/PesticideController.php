@@ -38,11 +38,11 @@ class PesticideController extends Controller
             $data= $request->all();
             Pesticide::create($data);
     
-            return redirect('/transport/store')->with('message','Pesticides data added successsfully');
+            return redirect('/transport')->with('message','Pesticides data added successsfully');
         
         }
         catch(\Exception $ex){
-            return redirect('/pesticides/store')->with('message','Someting went wrong');
+            return redirect('/pesticides')->with('message','Someting went wrong');
         }
     }
 

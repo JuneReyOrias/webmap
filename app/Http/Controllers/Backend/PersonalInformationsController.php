@@ -5,14 +5,20 @@ use App\Models\PersonalInformations;
 use App\Models\MultipleFile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PersonalInformationsRequest;
+use App\Http\Requests\UpdatePersonalInformationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use Nette\Utils\Strings;
+
 class PersonalInformationsController extends Controller
 {
 
-
+protected $personalInformations;
+public function __construct() {
+    $this->personalInformations = new PersonalInformations;
+}
     // public function MultiFile(){
        
     //     return view('multifile.import');
@@ -41,8 +47,8 @@ class PersonalInformationsController extends Controller
    
 
     public function PersonalInfoCrud():View{
-        $personalInformation= PersonalInformations::latest()->get();
-        return view('personalinfo.create',compact('personalInformation'));
+        $personalInformations= PersonalInformations::latest()->get();
+        return view('personalinfo.create',compact('personalInformations'));
     }
     // public function RiceMap(){
     //     $maps= PersonalInformations::latest()->get();
@@ -71,11 +77,11 @@ class PersonalInformationsController extends Controller
         $data= $request->all();
         PersonalInformations::create($data);
 
-        return redirect('/farm/index')->with('message','Personal informations added successsfully');
+        return redirect('/farmprofile')->with('message','Personal informations added successsfully');
     
     }
     catch(\Exception $ex){
-        return redirect('/personalinfo/index')->with('message','Someting went wrong');
+        return redirect('/personalinformation')->with('message','Someting went wrong');
     }
 
     
@@ -84,43 +90,149 @@ class PersonalInformationsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): View
+    public function show(personalInformations $personalInformations): View
     {
-        $personalInformation = PersonalInformations::find($id);
-        return view('personalinfo.create')->with('personalInformation',$personalInformation);
+        // $personalInformation = PersonalInformations::find($id);
+        return view('personalinfo.create')->with('personalInformations',$personalInformations);
     }
     
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($farmer_no)
     {
-        $personalInformation = PersonalInformations::findOrFail($id);
-        return view('personalinfo.edit', compact('personalInformation'));
-    
+        // dd($farmer_no);
+        $personalInformations = PersonalInformations::where('farmer_no',$farmer_no)->first();
+        // // $personalInformation = PersonalInformations::findOrFail($personalInformation);
+        return view('personalinfo.edit')->with('personalInformation',$personalInformations);
+       ;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePersonalInformationRequest $request,  $farmer_no)
     {
-        $personalInformation = PersonalInformations::find($id);
-        $input = $request->all();
-        $personalInformation->update($input);
-        return redirect('personalInformation')->with('flash_message', 'personalInformation Updated!'); 
+            // dd(($request->all()));
+            try {
+                // Get validated data from the request (if you're using validation rules)
+                $data = $request->validated();
+            
+                // If you want to use all data, use this line instead of the above line.
+                // $data = $request->all();
+            
+                // Update the PersonalInformations table
+                PersonalInformations::where('farmer_no', $farmer_no)->update($data);
+            
+                // Optionally, you can return a response indicating success
+                return redirect('/personalinfo/create')->with('message','Personal informations updated successsfully');
+            } catch (\Exception $e) {
+                // Handle any exceptions that might occur during the update process
+                return response()->json(['message' => 'Error updating record: ' . $e->getMessage()], 500);
+            }
+           
+        //     // $input = $request->all();
+        //   $data= $request->validated();
+        //   $data=($request->all());
+        //     PersonalInformations::where('farmer_no', '=', $farmer_no)->update($data);
+         
+        //  $farmer_no= $request->farmer_no;
+        //     // $personalInformations->update(array_merge($personalInformations->toArray(),$request->toArray()));
+        //     $data= $request->validated();
+        //     $data= $request->all();
+        //     $personalInformation = PersonalInformations::where('farmer_no',$farmer_no)->first();
+        //     $personalInformation = $personalInformation->update([
+        //         'first_name'=>$request->first_name,
+        //         'middle_name'=>$request->middle_name,
+        //         'last_name'=>$request->last_name,
+        //         'extension_name'=>$request->extension_name,
+        //         'home_address'=>$request->home_address,
+        //         'sex'=>$request->sex,
+        //         'religion'=>$request->religion,
+        //         'date_of_birth'=>$request->date_of_birth,
+        //         'place_of_birth'=>$request->place_of_birth,
+        //         'contact_no'=>$request->contact_no,
+        //         'civil_status'=>$request->civil_status,
+        //         'name_legal_spouse'=>$request->name_legal_spouse,
+        //         'no_of_children'=>$request->no_of_children,
+        //         'mothers_maiden_name'=>$request->mothers_maiden_name,
+        //         'highest_formal_education'=>$request->highest_formal_education,
+        //         'person_with_disability'=>$request->person_with_disability,
+        //         'pwd_id_no'=>$request->pwd_id_no,
+        //         'government_issued_id'=>$request->government_issued_id,
+        //         'gov_id_no'=>$request->gov_id_no,
+        //         'member_ofany_farmers_ass_org_coop'=>$request->member_ofany_farmers_ass_org_coop,
+        //         'nameof_farmers_ass_org_coop'=>$request->nameof_farmers_ass_org_coop,
+        //         'name_contact_person'=>$request->name_contact_person,
+        //         'cp_tel_no'=>$request->cp_tel_no,
+                
+                
+        //     ]);
+           
+          
+            // PersonalInformations::where('farmer_no' ,'=',$farmer_no)->updated($data);
+            // PersonalInformations::where('farmer_no' ,'=',$farmer_no)->update($request->all());
+                //  PersonalInformations::find( $farmer_no)->Update($request->all());
+     
+        
+        
+      
+     
+           
+        
+        // }
+        // catch(\Exception $ex){
+        //     return redirect('/personalinfo/create')->with('message','Someting went wrong');
+        // }
+    
+
+        // $personalInformations = PersonalInformations::where('farmer_no',$farmer_no)->find();
+        // $input=$request->all();
+        // $personalInformations->update($input);
+        // return redirect()->route('personalinfo.create')
+        //   ->with('success', 'Post updated successfully.');
     }
+    //     try{
+        
+    //         $data= $request->validated();
+    //         $data= $request->all();
+    //         PersonalInformations::update($data);
+    
+    //         return redirect('/farm/index')->with('message','Personal informations added successsfully');
+        
+    //     }
+    //     catch(\Exception $ex){
+    //         return redirect('/personalinfo/index')->with('message','Someting went wrong');
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy( $farmer_no)
     {
+        try {
+            $personalInformations = PersonalInformations::where('farmer_no', $farmer_no);
         
-            $personalInformation = PersonalInformations::findOrFail($id);
-            $personalInformation->delete();
-            return redirect()->route('personal_information.index')->with('success', 'Personal Information deleted successfully');
+            if ($personalInformations) {
+                $personalInformations->delete();
+                return redirect()->route('personalinfo.create')
+                                 ->with('message', 'Personal Informations deleted successfully');
+            } else {
+                return redirect()->route('personalinfo.create')
+                                 ->with('message', 'Personal Informations not found');
+            }
+        } catch (\Exception $e) {
+            return redirect()->route('personalinfo.create')
+                             ->with('message', 'Error deleting Personal Informations : ' . $e->getMessage());
+        }
         
+            // $personalInformations->delete();
+            // return redirect()->route('personal_information.index')->with('success', 'Personal Information deleted successfully');
+            // $personalInformations = PersonalInformations::findorfail($farmer_no);
+            // $personalInformations->delete();
+            // return redirect()->route('posts.index')
+            //   ->with('success', 'Post deleted successfully');
     }
 }
