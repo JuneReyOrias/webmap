@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\FarmProfile;
 class PersonalInformations extends Model
 {
     use HasFactory;
@@ -12,7 +12,7 @@ class PersonalInformations extends Model
  protected $primarykey ='farmer_no';
     protected $guarded=[];
     public function FarmProfile(){
-        return$this->hasOne(\app\FarmProfile::class);
+        return$this->hasMany(FarmProfile::class);
 
     }
     public function VariableCost(){

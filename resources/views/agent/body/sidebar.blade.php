@@ -21,17 +21,17 @@
       <li class="nav-item nav-category">Maps</li>
      
       <li class="nav-item">
-        <a href="" class="nav-link">
+        <a href="{{route('map.gmap')}}" class="nav-link">
           <i class="link-icon" data-feather="calendar"></i>
           <span class="link-title">ZamboAgriMap</span>
         </a>
       </li>
-      <li class="nav-item">
+      {{-- <li class="nav-item">
         <a href="https://earth.google.com/web/@7.15493912,122.21738186,143.06466033a,158600.66482102d,30.00000001y,0h,0t,0r" class="nav-link">
           <i class="link-icon" data-feather="calendar"></i>
           <span class="link-title">Google Earth</span>
         </a>
-      </li>
+      </li> --}}
       <li class="nav-item nav-category">Features</li>
       <li class="nav-item">
         <a class="nav-link" data-bs-toggle="collapse" href="#uiComponents" role="button" aria-expanded="false" aria-controls="uiComponents">
@@ -94,6 +94,30 @@
           <ul class="nav sub-menu">
             <li class="nav-item">
               <a href="" class="nav-link">RiceFarmerForms</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('personalinfo.index')}}" class="nav-link">Rice Survey Form</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('multifile.import')}}" class="nav-link">Multiple Import Form</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('personalinfo.create')}}" class="nav-link">Personal Informations Crud</a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('farm_profile.show')}}" class="nav-link">Farm Profile Crud</a>
+          </li>
+            <li class="nav-item">
+              <a href="{{route('fixed_cost.create')}}" class="nav-link">Fixed Cost Crud</a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('machineries_used.create')}}" class="nav-link">Machineries Used Crud</a>
+            </li> 
+            <li class="nav-item">
+              <a href="{{route('production_data.create')}}" class="nav-link">Last Production Data Crud</a>
+            </li> 
+              <li class="nav-item">
+              <a href="{{route('kml.import')}}" class="nav-link">Kml Import</a>
             </li>
            <!--- <li class="nav-item">
               <a href="pages/forms/advanced-elements.html" class="nav-link">Advanced Elements</a>

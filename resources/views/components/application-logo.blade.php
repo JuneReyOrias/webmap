@@ -1,1 +1,1 @@
-<img src="{{asset('assets/logo/logo.png')}}" style="width:100px; border-radius:50%;" >
+<img src="{{asset('assets/logo/logo.png')}}" style="width:100px; border-radius:50%; text-align:left;" >

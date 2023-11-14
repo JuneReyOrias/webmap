@@ -19,5 +19,33 @@ class FarmProfile extends Model
     // public function PersonalInformation(){
     //     return$this->hasOne(\app\PersonalInformations::class);
     // }
-   protected $guarded=[];
+    
+ protected $table='farm_profiles';
+ protected $guarded = [];
+    // protected $fillale=[
+    //    'farmno_id',
+    //    'farmer_no',
+
+    //       'seeds_typed_used',
+    //        'seeds_used_in_kg',
+    //       'seed_source',
+    //        'no_of_fertilizer_used_in_bags',
+    //        'no_of_pesticides_used_in_l_per_kg',
+    //        'no_of_insecticides_used_in_l',
+    //       'area_planted',
+    //       'date_planted',
+    //       'date_harvested',
+    //        'yield_tons_per_kg',
+    //        'unit_price_palay_per_kg',
+    //        'unit_price_rice_per_kg',
+    //       'type_of_product',
+    //       'sold_to',
+    //       'if_palay_milled_where',
+    //        'gross_income_palay',
+    //        'gross_income_rice',
+    // ];
+//    protected $fillable=['farm_no'];
+    public function PersonalInformations(){
+        return $this->belongsTo(FarmProfile::class, 'farmer_no');
+    }
 }

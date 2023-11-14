@@ -57,11 +57,14 @@
                       @csrf
                     <div class="mb-3">
                         <label for="login" class="form-label">Email address</label>
-                        <input type="text" name="login" class="form-control" id="login" placeholder="Email">
+                        <input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username">
                       </div>
                       <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" ame="password" class="form-control" id="password" autocomplete="current-password" placeholder="Password">
+                        <input id="password" class="block mt-1 w-full"
+                        type="password"
+                        name="password"
+                        required autocomplete="current-password">
                       </div>
                       <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="authCheck">
@@ -75,7 +78,7 @@
                           Login
                         </button>
                       </div>
-                      <a href="register.html" class="d-block mt-3 text-muted">Not a user? Sign up</a>
+                      <a href="register.html" class="d-block mt-3 text-muted">Create Account? Sign up</a>
                     </form>
                   </div>
                 </div>

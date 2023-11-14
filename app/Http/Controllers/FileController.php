@@ -21,10 +21,29 @@ class FileController extends Controller
        
         return view('multifile.import');
     }
-    public function saveUploadForm(Request $request){
-        // dd($request->file('upload_file'));
-        $uploadFile= $request-> file('upload_file');
-        Excel::import(new ImportMultipleFile(),$uploadFile);
-        return back()->withStatus('Excel File Imported Successfully');
+    // public function saveUploadForm(Request $request){
+    //     // dd($request->file('upload_file'));
+    //     $request->validate([
+    //                 'upload_file' => 'required|mimes:xlsx,xls,csv',
+    //             ]);
+    //     $uploadFile= $request-> file('upload_file');
+    //     Excel::import(new ImportMultipleFile(),$uploadFile);
+    //     return back()->withStatus('Excel File Imported Successfully');
+    // }
+    public function saveUploadForm(Request $request)
+{
+    //   dd($request->file('upload_file'));
+    $request->validate([
+        'upload_file' => 'required|mimes:xlsx,xls,csv',
+    ]);
+
+    $uploadFile = $request->file('upload_file');
+
+    try {
+        Excel::import(new ImportMultipleFile(), $uploadFile);
+        return back()->withStatus('File Imported Successfully');
+    } catch (\Exception $e) {
+        return back()->withError('Error importing file: ' . $e->getMessage());
     }
+}
 }

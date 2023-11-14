@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 class AgentController extends Controller
 {
     public function AgentDashboard(){
         return view('agent.agent_index');
     }
-    public function AgentLogout(Request $request)
+    public function agentlog(Request $request)
     {
         Auth::guard('web')->logout();
 
@@ -17,6 +18,6 @@ class AgentController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
-    }
+        return redirect('/landing');
+    }//end 
 }

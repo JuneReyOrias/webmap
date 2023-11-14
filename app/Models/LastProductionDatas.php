@@ -10,6 +10,9 @@ class LastProductionDatas extends Model
     use HasFactory;
     protected $guarded=[];
     public function PersonalInformation(){
-        return$this->hasOne(\app\PersonalInformationS::class);
+        return$this->hasOne(PersonalInformations::class);
+    }
+    public function FarmProfiles(){
+        return $this->hasMany(FarmProfile::class);
     }
 }

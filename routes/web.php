@@ -17,6 +17,8 @@ use App\Http\Controllers\Backend\TransportController;
 use App\Http\Controllers\Backend\VariableCostController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\KmlImportController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,14 +31,17 @@ use App\Http\Controllers\KmlImportController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
+// Route::get('home/', function () {
+//     return view('home');
+// });
+
+Route::get('/landing', [LandingPageController::class, 'LandingPage'])->name('landing-page.page');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/joinme' ,[PersonalInformationsController::class,'Personalfarms'])->name('farm-table.join_table');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -51,7 +56,8 @@ Route::middleware(['auth','role:admin'])->group(function(){
 
     Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
-    Route::patch('/admin/profile', [AdminController::class, 'AdminProfileStore'])->name('admin.profile.store');
+    // Route::patch('/admin/store', [AdminController::class, 'AdminProfileStore'])->name('admin.store');
+    Route::post('/admin/profile', [AdminController::class, 'update'])->name('admin.profile.update');
 
 //    Route::controller(PersonalInformationsController::class)->group(function(){
         //    Route::get('/map/gmap', 'Gmap')->name('map.gmap');
@@ -76,15 +82,15 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.
 Route::middleware(['auth','role:agent'])->group(function(){
 
 Route::get('/agent/dashboard', [AgentController::class, 'AgentDashboard'])->name('agent.dashb');
-
-Route::get('/agent/logout', [AgentController::class, 'AgentLogout'])->name('agent.logout');
+Route::get('/agent/logout', [AgentController::class, 'agentlog'])->name('agent.logout');
 
 });//end Group agent middleware
+
 Route::middleware(['auth','role:user'])->group(function(){
 
     Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.user_dashboard');
     
-    Route::get('/agent/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
     
     });//end Group agent middleware
 
@@ -102,6 +108,7 @@ Route::middleware(['auth','role:user'])->group(function(){
 //       Route::post('/personalinfo/index',[PersonalInformationsController::class, 'store'])->name('personalinfo.store');
     //   Route::get('/personalinfo/{personalInformations}/edit',[PersonalInformationsController::class, 'edit'])->name('personalinfo.edit');
       Route::get('/map/gmap',[PersonalInformationsController::class, 'Gmap'])->name('map.gmap');
+      Route::get('/map/arcmap',[FarmProfileController::class, 'ArcMap'])->name('map.arcmap');
       Route::get('/personalinfo/create',[PersonalInformationsController::class, 'PersonalInfoCrud'])->name('personalinfo.create');
 
 // Route::get('/farm/index',[FarmProfileController::class ,'FarmProfile'])->name('farm_profile.index');
@@ -143,7 +150,7 @@ Route::middleware(['auth','role:user'])->group(function(){
 // Route::get('/personalinfo/{personalInformations}/edit',[PersonalInformationsController::class, 'edit'])->name('personalinfo.edit');
 
 Route::get('/kml/import', [KmlImportController::class, 'index'])->name('kml.import');
-Route::post('/kml/import',[KmlImportController::class, 'store']);
+Route::post('/kml/import',[KmlImportController::class, 'store'])->name('kml.store');
 // Route::get('/', [KmlImportController::class, 'index']);
 // Route::post('/import', [KmlImportController::class, 'import']);
 
@@ -231,3 +238,4 @@ Route::post('/variablecost',[VariableCostController::class, 'store']);
       Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
       Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
   });
+  

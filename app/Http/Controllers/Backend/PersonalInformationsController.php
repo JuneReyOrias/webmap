@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 use Nette\Utils\Strings;
 
 class PersonalInformationsController extends Controller
@@ -18,6 +19,51 @@ class PersonalInformationsController extends Controller
 protected $personalInformations;
 public function __construct() {
     $this->personalInformations = new PersonalInformations;
+}
+public function Personalfarms() {
+
+  
+  
+
+
+   
+
+// $personalInformations = PersonalInformations::join('farm_profiles', 'personal_informations.farmer_no', '=', 'farm_profiles.farmer_no')
+//                                             ->join('fixed_costs', 'fixed_costs.farmno_id', '=', 'fixed_costs.farmno_id')
+//                                             ->get(['personal_informations.*', 'farm_profiles.tenurial_status','farm_profiles.gps_latitude'],['personal_informations.*', 'fixed_cost.fixed_id'],);
+
+              
+        // $personalInformations=DB::table('personal_informations')
+        //                             ->leftJoin('farm_profiles','farm_profiles.farmer_no','personal_informations.farmer_no',)
+    //     //                             ->leftJoin('personal_informations','personal_informations.farmno_id','farm_profiles.farmno_id',)->get();
+    $personalInformations = DB::table('personal_informations')
+    ->leftJoin('farm_profiles', 'farm_profiles.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('fixed_costs', 'fixed_costs.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('machineries_useds', 'machineries_useds.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('seeds', 'seeds.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('fertilizers', 'fertilizers.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('labors', 'labors.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('pesticides', 'pesticides.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('transports', 'transports.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('variable_costs', 'variable_costs.farmer_no', '=', 'personal_informations.farmer_no')
+    ->leftJoin('last_production_datas', 'last_production_datas.farmer_no', '=', 'personal_informations.farmer_no')
+    ->select(
+        'personal_informations.first_name', 'personal_informations.last_name',
+        'farm_profiles.tenurial_status',
+        'fixed_costs.total_amount',
+        'machineries_useds.total_cost_for_machineries', // Select all columns from machineries_useds
+        'seeds.total_seed_cost',
+        'fertilizers.total_cost_fertilizers',
+        'labors.total_labor_cost',
+        'pesticides.total_cost_pesticides',
+        'transports.total_transport_per_deliverycost',
+        'variable_costs.total_machinery_fuel_cost',
+        'last_production_datas.gross_income_palay',  'last_production_datas.gross_income_rice', 
+    )
+    ->get();
+    return view('farm-table.join_table',compact('personalInformations'));
+
+    // dd($personalInformations);
 }
     // public function MultiFile(){
        
@@ -29,11 +75,11 @@ public function __construct() {
     /**
      * Display a listing of the resource.
      */
-    public function ArcMap()
-    {
-     $personalInformations= PersonalInformations::all();
-     return view('map.arcmap',compact('personalInformations'));
-    }
+    // public function ArcMap()
+    // {
+    //  $personalInformations= PersonalInformations::all();
+    //  return view('map.arcmap',compact('personalInformations'));
+    // }
     public function Gmap()
     {
      $personalInformations= PersonalInformations::all();
@@ -131,6 +177,8 @@ public function __construct() {
                 // Handle any exceptions that might occur during the update process
                 return response()->json(['message' => 'Error updating record: ' . $e->getMessage()], 500);
             }
+
+    
            
         //     // $input = $request->all();
         //   $data= $request->validated();

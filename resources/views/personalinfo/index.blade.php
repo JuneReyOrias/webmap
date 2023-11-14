@@ -1,6 +1,8 @@
-@extends('admin.dashb')
-@section('admin')
+{{-- @extends('admin.dashb')
+@section('admin') --}}
+@extends('agent.agent_Dashboard')
 
+@section('agent')
 
 <div class="page-content">
 

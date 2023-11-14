@@ -35,11 +35,11 @@
              <div class="card-header">Upload KML File</div>
 
             <div class="card-body">
-                <form action="{{url('location')}}" method="post" >
-                    @csrf
+              <form action="{{ route('kml.store') }}" method="post" enctype="multipart/form-data">
+                @csrf
                     <div class="form-group">
                         <label for="file">Select KML File</label>
-                        <input type="file" name="file" id="file" class="form-control">
+                        <input type="file" name="location" accept=".kmz"class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

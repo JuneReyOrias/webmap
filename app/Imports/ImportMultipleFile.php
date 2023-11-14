@@ -3,13 +3,17 @@
 namespace App\Imports;
 
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class ImportMultipleFile implements WithMultipleSheets
+class ImportMultipleFile implements WithMultipleSheets, WithHeadingRow
 {
     /**
     * @param Collection $collection
     */
+
+    
     public function sheets():array
     {
         return

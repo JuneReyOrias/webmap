@@ -4968,16 +4968,16 @@ div.tox .btn-group-vertical>.btn-group:not(:first-child)>.tox-button,
     --bs-card-spacer-x: 1.5rem;
     --bs-card-title-spacer-y: 0.875rem;
     --bs-card-border-width: 1px;
-    --bs-card-border-color: #095437;
-    --bs-card-border-radius: 0.25rem;
+    --bs-card-border-color: #000;
+    --bs-card-border-radius: 1.4rem;
     --bs-card-inner-border-radius: calc(0.25rem - 1px);
     --bs-card-cap-padding-y: 0.875rem;
     --bs-card-cap-padding-x: 1.5rem;
     --bs-card-cap-bg: #E8D9A0;
     --bs-card-cap-color: ;
     --bs-card-height: ;
-    --bs-card-color: ;
-    --bs-card-bg: #ffffff;
+    --bs-card-color: #FAE392;
+    --bs-card-bg: ;
     --bs-card-img-overlay-padding: 1rem;
     --bs-card-group-margin: 0.75rem;
     position: relative;
@@ -4990,6 +4990,14 @@ div.tox .btn-group-vertical>.btn-group:not(:first-child)>.tox-button,
     background-clip: border-box;
     border: var(--bs-card-border-width) solid var(--bs-card-border-color);
     border-radius: var(--bs-card-border-radius);
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+/Edge */
+    user-select: none;
+    /* Standard */
 }
 
 .card>hr {
@@ -5022,7 +5030,7 @@ div.tox .btn-group-vertical>.btn-group:not(:first-child)>.tox-button,
 .card-body {
     flex: 1 1 auto;
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
-    color: var(--bs-card-color);
+    color: var(#fff3cd);
 }
 
 .card-title {
@@ -19791,8 +19799,8 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #0c1427 inset;
-    -webkit-text-fill-color: #d0d6e1;
+    -webkit-box-shadow: 0 0 0 30px #fff inset;
+    -webkit-text-fill-color: #000;
 }
 
 *:-moz-full-screen,
@@ -20354,6 +20362,7 @@ div.tox .buy-now-wrapper .tox-button svg,
 .main-wrapper .page-wrapper.full-page {
     width: 100%;
     margin-left: 0;
+    background: #01663b;
 }
 
 .main-wrapper .page-wrapper.full-page .page-content {
@@ -20505,7 +20514,7 @@ div.tox .buy-now-wrapper .tox-button svg,
 .navbar .search-form .input-group .typeahead.tt-hint::placeholder,
 .navbar .search-form .input-group .select2-container--default .select2-search--dropdown .select2-search__field::placeholder,
 .select2-container--default .select2-search--dropdown .navbar .search-form .input-group .select2-search__field::placeholder {
-    color: #7987a1;
+    color: #fff3cd;
 }
 
 .navbar .navbar-content {
@@ -22976,8 +22985,11 @@ div.tox .btn-group-lg>.btn-icon-text.tox-button .btn-icon-append,
 .auth-page .auth-side-wrapper {
     width: 100%;
     height: 100%;
-    background-image: url(https://via.placeholder.com/219x452);
-    background-size: cover;
+    background-image: url(https://watchmendailyjournal.com/wp-content/uploads/2023/04/da.jpg);
+    background-size: 350px 400px;
+    background-repeat: no-repeat;
+    background-size: 150% 130%;
+    border-radius: 1.4rem;
 }
 
 .email-aside-nav.collapse {

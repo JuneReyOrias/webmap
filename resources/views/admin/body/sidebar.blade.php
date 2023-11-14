@@ -27,7 +27,7 @@
           </a>
         </li>  --}}
         <li class="nav-item">
-          <a href="{{route('map.gmap')}}"class="nav-link">
+          <a href="{{route('map.arcmap')}}"class="nav-link">
             <i class="link-icon" data-feather="map"></i>
             <span class="link-title">Agri-Map</span>
           </a>
@@ -48,7 +48,7 @@
           <div class="collapse" id="uiComponents">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="" class="nav-link">Ayala</a>
+                <a href="{{route('farm-table.join_table')}}" class="nav-link">Ayala</a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">Tumaga</a>

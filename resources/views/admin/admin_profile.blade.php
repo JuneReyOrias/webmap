@@ -67,29 +67,30 @@
 
                   <h6 class="card-title">Update admin Profile</h6>
   
-                  <form methods="POST" action="{{route('admin.profile.store')}}"  class="forms-sample"
-                  enctype="multipart/form-data">
+                  <form action="{{route('admin.profile.update')}}"  class="forms-sample"
+                  enctype="multipart/form-data" methods="post" >
                   @csrf
-                  @method('patch')
+                
                     <div class="mb-3">
                       <label for="exampleInputUsername1" name="name" class="form-label">Name</label>
-                      <input type="text" class="form-control" id="exampleInputUsername1" autocomplete="off"value="{{$profileData->name}}">
+                      <input type="text"  name="name" class="form-control" id="exampleInputUsername1" autocomplete="off"value="{{$profileData->name}}">
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputEmail1" name="email" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" value="{{$profileData->email}}">
+                      <input type="email"name="email" class="form-control" id="exampleInputEmail1" value="{{$profileData->email}}">
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" name="agri_district" class="form-label">Agri_District</label>
-                      <input type="text" class="form-control" id="agri_district" autocomplete="off" value="{{$profileData->agri_district}}">
+                      <input type="text"name="agri_district" class="form-control" id="agri_district" autocomplete="off" value="{{$profileData->agri_district}}">
+                    </div>
+                
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" name="password"class="form-label">Password</label>
+                      <input type="password" name="password" class="form-control" id="exampleInputPassword1" autocomplete="off" value="{{$profileData->password}}">
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" name="role" class="form-label">Role</label>
-                      <input type="text" class="form-control" id="role" autocomplete="off" value="{{$profileData->role}}">
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" name="password"class="form-label">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1" autocomplete="off" value="{{$profileData->password}}">
+                      <input type="text"name="role"  class="form-control" id="role" autocomplete="off" value="{{$profileData->role}}">
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Photo</label>
