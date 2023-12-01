@@ -11,7 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 class RegisterRequest extends FormRequest
 {
     /**
@@ -44,18 +47,19 @@ class RegisterRequest extends FormRequest
             'agri_district'=>[
                 'required',
                 'string',
-                'max:50',
+                'max:10',
             ],
             'password'=>[
                 'required',
                 'string',
-                'max:3',
+                'min:10',
                 
             ],
             'role'=>[
                 'required',
                 'string',
                 'max:50',
+            Rule::in(['admin', 'agent', 'user', /* Add other roles as needed */]),
             ],
            
         ];
@@ -66,7 +70,7 @@ class RegisterRequest extends FormRequest
             'name.required'=>'Please input name',
             'email.required'=>'Please input email',
             'agri_district.required'=>'Please input agri_district',
-            'password.required'=>'Please input password',
+            'password.required'=>'Please input 8 digitspassword',
             'role.required'=>'Please input role',
             
        ];

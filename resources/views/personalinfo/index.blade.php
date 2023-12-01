@@ -1,8 +1,10 @@
-{{-- @extends('admin.dashb')
-@section('admin') --}}
-@extends('agent.agent_Dashboard')
+@extends('admin.dashb')
+@section('admin')
+{{-- @extends('agent.agent_Dashboard')
+@section('agent')  --}}
+{{-- @extends('agent.agent_Dashboard') --}}
 
-@section('agent')
+{{-- @section('agent') --}}
 
 <div class="page-content">
 
@@ -27,6 +29,7 @@
           
           <h6 class="card-title"><span>I.</span>Personal Information</h6>
 
+          
          {{-- <p class="text-muted mb-3">Read the <a href="https://github.com/RobinHerbots/Inputmask" target="_blank"> Official Inputmask Documentation </a>for a full list of instructions and other options.</p> --}}
           <form action{{url('personal_informations')}} method="post">
             @csrf

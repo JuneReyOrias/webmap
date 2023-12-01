@@ -20,6 +20,7 @@ class User extends Authenticatable
      */
     protected $table="users";
     protected $fillable = [
+    
         'name',
         'email',
         'agri_district',
@@ -28,6 +29,75 @@ class User extends Authenticatable
       
     ];
 
+    public function personalinformations()
+    {
+        return $this->hasMany(PersonalInformations::class,'id','users_id');
+    }
+    public function farmprofiles()
+    {
+        return $this->hasMany(FarmProfile::class,'id','users_id');
+    }
+    public function agridistricts()
+    {
+        return $this->hasOne(AgriDistrict::class,'id','users_id');
+    }
+    public function categorize()
+    {
+        return $this->hasMany(Categorize::class,'id','users_id');
+    }
+    public function cropcategory()
+    {
+        return $this->hasMany(CropCategory::class,'id','users_id');
+    }
+    public function fisheriescategory()
+    {
+        return $this->hasMany(FisheriesCategory::class,'id','users_id');
+    }
+    public function livestockcategory()
+    {
+        return $this->hasMany(LivestockCategory::class,'id','users_id');
+    }
+    public function crop()
+    {
+        return $this->hasMany(Crop::class,'id','users_id');
+    }
+    public function livestock()
+    {
+        return $this->hasMany(Livestock::class,'id','users_id');
+    }
+    public function parcellaryboundaries()
+    {
+        return $this->hasMany(ParcelBoarder::class,'id','users_id');
+    }
+    public function riceboarders()
+    {
+        return $this->hasMany(RicefieldBoarder::class,'id','users_id');
+    }
+    public function getPrimaryKey()
+    {
+        return $this->getKey();
+    }
+    // The 'boot' method to automatically load personalInformations after user creation
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Listen for the 'created' event
+        static::created(function ($user) {
+            // Automatically fetch the related PersonalInformations
+            $user->load('personalInformations');
+        });
+    }
+    // protected static function boots()
+    // {
+    //     parent::boot();
+
+    //     // Listen for the 'created' event
+    //     static::created(function ($user) {
+    //         // Automatically fetch the related PersonalInformations
+    //         $user->load('farmprofile');
+    //     });
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -47,7 +117,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function farmers(){
-        return $this->hasmany(farmers::class, 'user_id', 'id' );
-    }
+  
+    
+    // Define the relationship with FarmProfile
+   
 }

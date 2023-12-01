@@ -15,12 +15,20 @@
 <!-- boostrap company model -->
 <div class="modal fade" id="login-modal" aria-hidden="true">
 <div class="modal-dialog modal-md">
-<div class="modal-content"style=" background-image: url(https://watchmendailyjournal.com/wp-content/uploads/2023/04/da.jpg);">
+<div class="modal-content z">
 <div class="modal-header">
 <h4 class="modal-title" id="loginModal"></h4>
+<button class="modal-close" data-id="demo-modal" aria-label="Close">
 </div>
 <div class="modal-body">
-    
+  
+    @if($errors->any())
+              <ul class="alert alert-warning">
+                @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+              </ul>
+              @endif
       <div class="main_div">
         <div class="title">Login Form</div>
         
@@ -63,7 +71,17 @@
       
   
 <div class="modal-footer">
-
+<script>const closeModal = (modal) => {
+  document.body.style.overflow = "auto";
+  modal.removeAttribute("open");
+  document.removeEventListener("keydown", escClose);
+  document.body.removeChild(document.getElementById("modal-overlay"));
+}; 
+const escClose = (e) => {
+  if (e.keyCode == 27) {
+    closeModal();
+  }
+};</script>
 </div>
 </div>
 </div>

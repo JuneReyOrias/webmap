@@ -22,7 +22,6 @@ class ImportMachineriesUseds implements ToModel,WithHeadingRow
            'harvesting_cost'=>$row['harvesting_cost'],
            'post_harvest_cost'=>$row['post_harvest_cost'],
            'total_cost_for_machineries'=>$row['total_cost_for_machineries'],
-           
         ]);
     }
 }

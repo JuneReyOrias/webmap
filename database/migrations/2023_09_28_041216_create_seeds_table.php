@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('seeds', function (Blueprint $table) {
-            $table->id('seed_id');
+            $table->id();
             $table->string('seed_name',30)->nullable();
             $table->string('seed_type',30)->nullable();
             $table->string('unit',30);
@@ -20,6 +20,19 @@ return new class extends Migration
             $table->double('unit_price',15.4);
             $table->double('total_seed_cost',15,4);
             $table->timestamps();
+
+            
+            
+            // $table->id();
+            // $table->string('seed_name',30)->nullable();
+            // $table->string('seed_type',30)->nullable();
+            // $table->string('unit',30);
+            // $table->double('quantity',15,4);
+            // $table->double('unit_price',15.4);
+            // $table->double('total_seed_cost',15,4);
+            // $table->foreignId('personal_informations_id')->nullable()->constrained('personal_informations');
+            // $table->foreignId('farm_profiles_id')->nullable()->constrained('farm_profiles');
+            // $table->timestamps();
         });
     }
 

@@ -30,7 +30,10 @@
             <div class="row mb-3">
              
               <div class="col-md-3">
-
+                {{-- <div class="form-floating mb-4 mb-md-0">
+                  <input id="lastname" class="form-control mb-4 mb-md-0" name="farmer_no" value="{{$farmprofile->farmer_no}}" placeholder="" type="text" aria-label="Lastname"id="floatingInput">
+                  <label for="floatingInput" >Tenurial Status:</label>
+                </div> --}}
                 <div class="form-floating mb-4 mb-md-0">
                 <input id="lastname" class="form-control mb-4 mb-md-0" name="tenurial_status" value="{{$farmprofile->tenurial_status}}" placeholder="" type="text" aria-label="Lastname"id="floatingInput">
                 <label for="floatingInput" >Tenurial Status:</label>

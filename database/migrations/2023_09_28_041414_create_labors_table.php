@@ -12,11 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('labors', function (Blueprint $table) {
-            $table->id('labor_id');
+            $table->id();
             $table->integer('no_of_person');
             $table->double('rate_per_person',15,2);
             $table->double('total_labor_cost',15,2);
             $table->timestamps();
+            
+            // $table->id();
+            // $table->integer('no_of_person');
+            // $table->double('rate_per_person',15,2);
+            // $table->double('total_labor_cost',15,2);
+            // $table->timestamps();
         });
     }
 

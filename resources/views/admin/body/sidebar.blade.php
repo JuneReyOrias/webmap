@@ -78,7 +78,7 @@
           <div class="collapse" id="advancedUI">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="pages/advanced-ui/cropper.html" class="nav-link">Crops</a>
+                <a href="" class="nav-link">Crops</a>
               </li>
               <li class="nav-item">
                 <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Livestock</a>
@@ -201,13 +201,41 @@
           <div class="collapse" id="icons">
             <ul class="nav sub-menu">
               <li class="nav-item">
-                <a href="pages/icons/feather-icons.html" class="nav-link">polygon Boundary</a>
+                <a href="{{route('polygon.create')}}" class="nav-link">polygon Boundary</a>
               </li>
               <li class="nav-item">
-                <a href="pages/icons/flag-icons.html" class="nav-link">Parcellary Boarders</a>
+                <a href="" class="nav-link">Parcellary Boarders</a>
               </li>
               <li class="nav-item">
-                <a href="pages/icons/mdi-icons.html" class="nav-link">Ricefield Boarders</a>
+                <a href="" class="nav-link">Ricefield Boarders</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('agri_districts.insertdata')}}" class="nav-link">Agri-Districts</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('categorize.index')}}" class="nav-link">Categorize Create</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('crop_category.crop_create')}}" class="nav-link">Crop Category Create</a>
+              </li>      
+               <li class="nav-item">
+                <a href="{{route('fisheries_category.fisheries_create')}}" class="nav-link">Fisheries Category Create</a>
+              </li>    
+               
+              <li class="nav-item">
+                <a href="{{route('livestock_category.livestock_create')}}" class="nav-link">Livestocks Category Create</a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('crops.create')}}" class="nav-link">Crop Create</a>
+              </li>          
+               <li class="nav-item">
+                <a href="{{route('fish.create')}}" class="nav-link">Fisheries  Create</a>
+              </li>        
+               <li class="nav-item">
+                <a href="{{route('livestocks.create')}}" class="nav-link">Livestocks Create</a>
+              </li> 
+              <li class="nav-item">
+                <a href="" class="nav-link">ADipslay</a>
               </li>
             </ul>
           </div>
@@ -238,7 +266,7 @@
               </li>
               <li class="nav-item">
                 <a href="pages/general/timeline.html" class="nav-link">Timeline</a>
-              </li> --}}
+              </li>
             </ul>
           </div>
         </li>

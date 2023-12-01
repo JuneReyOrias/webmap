@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class RicefieldBoarder extends Model
 {
     use HasFactory;
+    protected $fillable=[
+
+    ];
+    public function parcellaryboarder()
+    {
+        return $this->belongsTo(ParcelBoarder::class, 'id','ricefield_boarders_id');
+    }
+
+
+
+
+
+
+
+
+
 }

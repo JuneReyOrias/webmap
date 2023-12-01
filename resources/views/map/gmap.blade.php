@@ -10,6 +10,15 @@
 
     {{-- <!-- File input for uploading files -->
     <input type="file" id="fileInput" accept=".kml, .kmz, .geojson"> --}}
+    
+  @foreach($districts as $location)
+  <div class="test" ></div>
+    <div data-lat="{{ $location->latitude }}" >{{ $location->latitude }}</div>
+    data-lng="{{ $location->longitude }}" 
+    data-location="{{ $location->district }}" 
+     >data</div>
+
+@endforeach 
   </nav>
 
   <style>

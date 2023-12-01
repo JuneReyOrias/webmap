@@ -72,7 +72,7 @@
         <div class="collapse" id="advancedUI">
           <ul class="nav sub-menu">
             <li class="nav-item">
-              <a href="{{route('personalinfo.index')}}" class="nav-link">Crops</a>
+              <a href="" class="nav-link">Crops</a>
             </li>
             <li class="nav-item">
               <a href="pages/advanced-ui/owl-carousel.html" class="nav-link">Livestock</a>
@@ -96,13 +96,13 @@
               <a href="" class="nav-link">RiceFarmerForms</a>
             </li>
             <li class="nav-item">
-              <a href="{{route('personalinfo.index')}}" class="nav-link">Rice Survey Form</a>
+              <a href="{{route('personalinfo.index_agent')}}" class="nav-link">Rice Survey Form</a>
             </li>
             <li class="nav-item">
-              <a href="{{route('multifile.import')}}" class="nav-link">Multiple Import Form</a>
+              <a href="{{route('multifile.import_agent')}}" class="nav-link">Multiple Import Form</a>
             </li>
             <li class="nav-item">
-              <a href="{{route('personalinfo.create')}}" class="nav-link">Personal Informations Crud</a>
+              <a href="{{route('personalinfo.show_agent')}}" class="nav-link">Personal Informations Crud</a>
             </li>
             <li class="nav-item">
               <a href="{{route('farm_profile.show')}}" class="nav-link">Farm Profile Crud</a>

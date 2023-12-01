@@ -44,12 +44,12 @@
   </ul>
   @endif
     <div class="main-wrapper">
-		<div class="page-wrapper full-page">
-			<div class="page-content d-flex align-items-center justify-content-center">
+		<div class="page-wrapper full-pages">
+			<div class="page-contents d-flex align-items-center justify-content-center">
 
 				<div class="row w-100 mx-0 auth-page">
 					<div class="col-md-8 col-xl-6 mx-auto">
-						<div class="card">
+						<div class="card-register" >
 							<div class="row">
                 <div class="col-md-4 pe-md-0">
                   <div class="auth-side-wrapper">
@@ -97,7 +97,7 @@
                             Sign up
                           </button>
                       </div>
-                      <a href={{url('/home')}} class="d-block mt-3 text-muted">have already account? Log in</a>
+                      <a href={{url('/landing')}} class="d-block mt-3 text-muted">have already account? Log in</a>
                     </form>
                   </div>
                 </div>

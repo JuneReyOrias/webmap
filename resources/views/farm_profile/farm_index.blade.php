@@ -11,7 +11,8 @@
   </nav>
   <div class="progress mb-3">
     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30% Complete</div>
-
+      
+             
   </div>
   <div class="row">
     <div class="col-md-12 grid-margin">
@@ -26,17 +27,36 @@
           </ul>
           @endif
           <h6 class="card-title"><span>II.</span>Farm Profile</h6>
-
+      
+          {{-- @section('content')
+          <div class="form-floating mb-4 mb-md-0">
+              <select class="form-select" name="personal_information_id" id="personalInformationDropdown" aria-label="Floating label select">
+                  <option selected disabled>Select Personal Information</option>
+                  @foreach( $personalInformations as $personalInfo)
+                      <option value="{{ $personalInfo->id }}">{{ $personalInfo->first_name }} {{ $personalInfo->last_name }}</option>
+                  @endforeach
+              </select>
+              <label for="personalInformationDropdown">Select Personal Information:</label>
+          </div>
+      @endsection  --}}
+      
+      @foreach($personalInformations  as $persoanlinfo)
+              <input id="personal_information_id" class="form-control mb-4 mb-md-0" name="id" value="{{ $persoanlinfo->id}}" placeholder="" type="text" aria-label="personal_information_id"id="floatingInput">
+              <label for="floatingInput" >personal_information_id:</label>
+              <input id="personal_information_id" class="form-control mb-4 mb-md-0" name="personal_information_id" value="{{ $persoanlinfo->first_name}}" placeholder="" type="text" aria-label="personal_information_id"id="floatingInput">
+              <input id="personal_information_id" class="form-control mb-4 mb-md-0" name="personal_information_id" value="{{ $persoanlinfo->last_name}}" placeholder="" type="text" aria-label="personal_information_id"id="floatingInput">
+              @endforeach
           <form  action{{url('farm_profiles')}} method="post"  >
             @csrf
             <div class="row mb-3">
-             
+            
               <div class="col-md-3">
-
+ 
                 <div class="form-floating mb-4 mb-md-0">
                 <input id="lastname" class="form-control mb-4 mb-md-0" name="tenurial_status" placeholder="" type="text" aria-label="Lastname"id="floatingInput">
                 <label for="floatingInput" >Tenurial Status:</label>
               </div>
+            
             </div>
             <div class="col-md-3">
               <div class="form-floating mb-4 mb-md-0">

@@ -21,8 +21,12 @@ class FileController extends Controller
        
         return view('multifile.import');
     }
+    public function MultiFilesAgent(){
+       
+        return view('multifile.import_agent');
+    }
     // public function saveUploadForm(Request $request){
-    //     // dd($request->file('upload_file'));
+        // dd($request->file('upload_file'));
     //     $request->validate([
     //                 'upload_file' => 'required|mimes:xlsx,xls,csv',
     //             ]);
@@ -43,6 +47,7 @@ class FileController extends Controller
         Excel::import(new ImportMultipleFile(), $uploadFile);
         return back()->withStatus('File Imported Successfully');
     } catch (\Exception $e) {
+        dd($e); // Debugging statement to inspect the exception
         return back()->withError('Error importing file: ' . $e->getMessage());
     }
 }

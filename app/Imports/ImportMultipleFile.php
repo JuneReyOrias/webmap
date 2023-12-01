@@ -18,10 +18,11 @@ class ImportMultipleFile implements WithMultipleSheets, WithHeadingRow
     {
         return
         [
-            'FarmProfile'=> new ImportFarmProfile(),
+           
             'Personal Informations'=> new PersonalInformationsImport(),
-            'Machineries Used'=> new ImportMachineriesUseds(),
+            'FarmProfile'=> new ImportFarmProfile(),
             'Fixed Cost'=> new ImportFixedCost(),
+            'Machineries Used'=> new ImportMachineriesUseds(),
             'Variable Cost'=>new ImportVariableCost(),
             'Seed'=> new ImportSeed(),
             'Labor'=> new ImportLabor(),

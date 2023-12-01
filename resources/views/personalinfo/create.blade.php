@@ -55,39 +55,39 @@
                 </thead>
                 <tbody>
                   @if($personalInformations->count() > 0)
-                @foreach($personalInformations as $personalInformations)
+                @foreach($personalInformations as $personalInformation)
                     <tr class="table-light">
                          <td>{{ $loop->iteration }}</td>
-                        <td>{{ $personalInformations->first_name }}</td>
-                        <td>{{ $personalInformations->middle_name }}</td>
-                        <td>{{ $personalInformations->last_name }}</td>
-                        <td>{{ $personalInformations->extension_name }}</td>
-                        <td>{{ $personalInformations->home_address}}</td>
-                        <td>{{ $personalInformations->sex }}</td>
-                        <td>{{ $personalInformations->religion }}</td>
-                        <td>{{ $personalInformations->date_of_birth }}</td>
-                        <td>{{ $personalInformations->place_of_birth}}</td>
-                        <td>{{ $personalInformations->contact_no }}</td>
-                        <td>{{ $personalInformations->civil_status }}</td>
-                        <td>{{ $personalInformations->name_legal_spouse }}</td>
-                        <td>{{ $personalInformations->no_of_children }}</td>
-                        <td>{{ $personalInformations->mothers_maiden_name }}</td>
-                        <td>{{ $personalInformations->highest_formal_education }}</td>
-                        <td>{{ $personalInformations->person_with_disability}}</td>
-                        <td>{{ $personalInformations->government_issued_id }}</td>
-                        <td>{{ $personalInformations->id_type }}</td>
-                        <td>{{ $personalInformations->gov_id_no }}</td>
-                        <td>{{ $personalInformations->member_ofany_farmers_ass_org_coop }}</td>
-                        <td>{{ $personalInformations->nameof_farmers_ass_org_coop }}</td>
-                        <td>{{ $personalInformations->name_contact_person }}</td>
-                        <td>{{ $personalInformations->cp_tel_no }}</td>
+                        <td>{{  $personalInformation->first_name }}</td>
+                        <td>{{  $personalInformation->middle_name }}</td>
+                        <td>{{  $personalInformation->last_name }}</td>
+                        <td>{{  $personalInformation->extension_name }}</td>
+                        <td>{{  $personalInformation->home_address}}</td>
+                        <td>{{  $personalInformation->sex }}</td>
+                        <td>{{  $personalInformation->religion }}</td>
+                        <td>{{  $personalInformation->date_of_birth }}</td>
+                        <td>{{  $personalInformation->place_of_birth}}</td>
+                        <td>{{  $personalInformation->contact_no }}</td>
+                        <td>{{  $personalInformation->civil_status }}</td>
+                        <td>{{  $personalInformation->name_legal_spouse }}</td>
+                        <td>{{  $personalInformation->no_of_children }}</td>
+                        <td>{{  $personalInformation->mothers_maiden_name }}</td>
+                        <td>{{  $personalInformation->highest_formal_education }}</td>
+                        <td>{{  $personalInformation->person_with_disability}}</td>
+                        <td>{{  $personalInformation->government_issued_id }}</td>
+                        <td>{{  $personalInformation->id_type }}</td>
+                        <td>{{  $personalInformation->gov_id_no }}</td>
+                        <td>{{  $personalInformation->member_ofany_farmers_ass_org_coop }}</td>
+                        <td>{{  $personalInformation->nameof_farmers_ass_org_coop }}</td>
+                        <td>{{  $personalInformation->name_contact_person }}</td>
+                        <td>{{  $personalInformation->cp_tel_no }}</td>
                         
   
                         <td>
                            
-                             <a href="{{route('personalinfo.edit', $personalInformations->farmer_no)}}" title="Edit Student"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a> 
+                             <a href="{{route('personalinfo.edit',  $personalInformation->id)}}" title="Edit Student"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a> 
                 
-                             <form  action="{{ route('personalinfo.destroy', $personalInformations->farmer_no) }}"method="post" accept-charset="UTF-8" style="display:inline">
+                             <form  action="{{ route('personalinfo.destroy',  $personalInformation->id) }}"method="post" accept-charset="UTF-8" style="display:inline">
                                 {{ csrf_field()}}
                                 <button type="submit" class="btn btn-danger btn-sm" title="Delete Student" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                             </form>

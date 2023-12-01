@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 use App\Models\PersonalInformations;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\MultipleFile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PersonalInformationsRequest;
@@ -19,7 +20,32 @@ class PersonalInformationsController extends Controller
 protected $personalInformations;
 public function __construct() {
     $this->personalInformations = new PersonalInformations;
+
 }
+public function FarmProfiles(){
+    try {
+       // Retrieve the necessary information from the personal_informations table
+       $personalInformations = PersonalInformations::select('id', 'first_name', 'last_name')
+       ->latest('id') // Order by id in descending order (latest first)
+    ->first()
+->get();
+   
+//    if ($personalInformations) {
+//        // Record found, you can access its properties
+//        $id = $personalInformations->id;
+//        $firstname = $personalInformations->first_name;
+//        $lastname = $personalInformations->last_name;
+//    } else {
+//        // Record not found, handle it accordingly (e.g., show an error message)
+//        echo "Record not found!";}
+       // You can return the data to a view or process it further
+       return view('farm_profile.farm_index', ['personalInformations' => $personalInformations]);
+   } catch (\Exception $ex) {
+       // Log the exception for debugging purposes
+       dd($ex);
+       return redirect()->back()->with('message', 'Something went wrong');
+   }
+    }
 public function Personalfarms() {
 
   
@@ -90,11 +116,20 @@ public function Personalfarms() {
         $personalInformation= PersonalInformations::all();
     return view('personalinfo.index',compact('personalInformation'));
     }
+    public function Agent(): View
+    {
+        $personalInformation= PersonalInformations::all();
+    return view('personalinfo.index_agent',compact('personalInformation'));
+    }
    
 
     public function PersonalInfoCrud():View{
         $personalInformations= PersonalInformations::latest()->get();
         return view('personalinfo.create',compact('personalInformations'));
+    }
+    public function PersonalInfoCrudAgent():View{
+        $personalInformations= PersonalInformations::latest()->get();
+        return view('personalinfo.show_agent',compact('personalInformations'));
     }
     // public function RiceMap(){
     //     $maps= PersonalInformations::latest()->get();
@@ -113,43 +148,116 @@ public function Personalfarms() {
      */
     public function store(PersonalInformationsRequest $request): RedirectResponse
     {
-        // PersonalInformations::create($request->all());
-         
-        // return redirect()->route('personalinfo.index')
-        //                 ->with('success','Product created successfully.');
-    try{
+        // try {
+        //     // Your validation logic here
+        //     $data = $request->validated();
         
-        $data= $request->validated();
-        $data= $request->all();
-        PersonalInformations::create($data);
-
-        return redirect('/farmprofile')->with('message','Personal informations added successsfully');
+        //     // Assuming there's a relationship between User and PersonalInformations
+        //     $users = auth()->user();
+        
+        //     // Set the foreign key value directly in the $data array
+        //     $data['users_id'] = $users->id;
+        
+        //     // Set a value for 'id_type' (replace 1 with the appropriate value)
+        //     $data['id_type'] = 1; // Adjust the value based on your application's logic
+        
+        //     // Create a new PersonalInformations record
+        //     PersonalInformations::create($data);
+        
+        //     // Debugging statement to inspect data or variables
+        //     dd('Data processed successfully');
+        
+        //     return redirect('/farmprofile')->with('message', 'Personal information added successfully');
+        // } catch (\Exception $ex) {
+        //     // Log the exception or handle it as needed
+        //     dd($ex); // Debugging statement to inspect the exception
+        
+        //     return redirect('/personalinformation')->with('message', 'Something went wrong');
+        // }
+        
+        // try {
+        //     // Your validation logic here
+        //     $data = $request->validated();
+        
+        //     // Assuming there's a relationship between User and PersonalInformations
+        //     $user = auth()->user();
+        //     $data['id_type'] = 1;
+        //     // // Set the foreign key value to the primary key of the user
+        //     // $data['users_id'] = $user->getPrimaryKey();
+        
+        //     // Create a new PersonalInformations record and associate it with the user
+        //     PersonalInformations::create($data);
+        
+        //     // Debugging statement to inspect data or variables
+        //     // dd('Data processed successfully');
+        
+        //     return redirect('/farmprofile')->with('message', 'Personal information added successfully');
+        // } catch (\Exception $ex) {
+        //     // Log the exception or handle it as needed
+        //     dd($ex); // Debugging statement to inspect the exception
+        
+        //     return redirect('/personalinformation')->with('message', 'Something went wrong');
+        // }
+        try{
+        
+            $data= $request->validated();
+            $data= $request->all();
+            PersonalInformations::create($data);
     
-    }
-    catch(\Exception $ex){
-        return redirect('/personalinformation')->with('message','Someting went wrong');
-    }
+            return redirect('/farmprofile')->with('message','Personal informations added successsfully');
+        
+        }
+        catch(\Exception $ex){
+            dd($ex); // Debugging statement to inspect the exception
+            return redirect('/personalinformation')->with('message','Someting went wrong');
+            
+        }   
+        
+        
+               
+          
+          
+    // try{
+        
+    //     $data= $request->validated();
+    //     $data= $request->all();
+    //     PersonalInformations::create($data);
 
+    //     return redirect('/farmprofile')->with('message','Personal informations added successsfully');
     
-    }
+    // }
+    // catch(\Exception $ex){
+    //     return redirect('/personalinformation')->with('message','Someting went wrong');
+    // }
+
+} 
+    
 
     /**
      * Display the specified resource.
      */
     public function show(personalInformations $personalInformations): View
     {
-        // $personalInformation = PersonalInformations::find($id);
+        // $personalInformations = PersonalInformations::find($id);
         return view('personalinfo.create')->with('personalInformations',$personalInformations);
     }
     
+    public function showPersonalInfo()
+    {
+        // Fetch personal information data
+        $personalInformations = PersonalInformations::select('id', 'first_name', 'last_name')->get();
+
+        // Pass the data to the view
+        return view('farm_profile.farm_index', compact('personalInformation'));
+    }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($farmer_no)
+    public function edit($personal_information_id)
     {
         // dd($farmer_no);
-        $personalInformations = PersonalInformations::where('farmer_no',$farmer_no)->first();
+        $personalInformations = PersonalInformations::where('personal_information_id',$personal_information_id)->first();
         // // $personalInformation = PersonalInformations::findOrFail($personalInformation);
         return view('personalinfo.edit')->with('personalInformation',$personalInformations);
        ;
@@ -258,10 +366,10 @@ public function Personalfarms() {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( $farmer_no)
+    public function destroy( $id)
     {
         try {
-            $personalInformations = PersonalInformations::where('farmer_no', $farmer_no);
+            $personalInformations = PersonalInformations::where('id', $id);
         
             if ($personalInformations) {
                 $personalInformations->delete();

@@ -12,11 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transports', function (Blueprint $table) {
-            $table->id('tranport_id');
+            $table->id();
             $table->string('name_of_vehicle',30)->nullable();
             $table->string('type_of_vehicle',30)->nullable();
             $table->double('total_transport_per_deliverycost',15,2);
-            $table->timestamps();
+            $table->timestamps(); 
+           
+            // $table->id();
+            // $table->string('name_of_vehicle',30)->nullable();
+            // $table->string('type_of_vehicle',30)->nullable();
+            // $table->double('total_transport_per_deliverycost',15,2);
+            // $table->foreignId('personal_informations_id')->nullable()->constrained('personal_informations');
+            // $table->foreignId('farm_profiles_id')->nullable()->constrained('farm_profiles');
+            // $table->timestamps();
         });
     }
 

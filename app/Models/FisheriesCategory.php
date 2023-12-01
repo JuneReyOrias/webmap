@@ -8,4 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class FisheriesCategory extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'user_id',
+        'agri_district_id',
+        'categorize_id',
+        'fisheries_category_name',
+        'fisheries_description',
+        
+    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class,'users_id', )->withDefault();
+    }
+    public function agridistricts()
+    {
+        return $this->belongsTo(AgriDistrict::class,'agri_districts_id','id');
+    }
+    public function categorize()
+    {
+        return $this->belongsTo(Categorize::class,'categorizes_id','id');
+    }
+
+    public function fisheries()
+    {
+        return $this->hasMany(Fisheries::class,'id','fisheries_categorys_id');
+    }
+
 }

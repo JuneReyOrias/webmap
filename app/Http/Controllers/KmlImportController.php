@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 class KmlImportController extends Controller
 {
 
@@ -70,18 +71,25 @@ public function parseKML($path)
 }
 public function insertDataIntoDatabase($data)
 {
+    // Assuming 'location_data' is a disk defined in your filesystem config
+    $xmlPath = 'location_data/' . now()->format('Ymd_His') . '_data.xml';
+
+    $xmlContent = '<?xml version="1.0" encoding="UTF-8"?><locations>';
+    
     foreach ($data as $entry) {
-        DB::table('location')->insert([
-            'name' => $entry['name'],
-            'latitude' => $entry['latitude'],
-            'longitude' => $entry['longitude'],
-            'altitude' => $entry['altitude'],
-            // 'altitude' => $entry['altitude'],
-            // Add other fields as needed
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        $xmlContent .= '<location>';
+        $xmlContent .= '<name>' . $entry['name'] . '</name>';
+        $xmlContent .= '<latitude>' . $entry['latitude'] . '</latitude>';
+        $xmlContent .= '<longitude>' . $entry['longitude'] . '</longitude>';
+        $xmlContent .= '<altitude>' . $entry['altitude'] . '</altitude>';
+        $xmlContent .= '</location>';
     }
+
+    $xmlContent .= '</locations>';
+
+    Storage::put($xmlPath, $xmlContent);
+
+    return $xmlPath;
 }
     }
     // {  dd($request);

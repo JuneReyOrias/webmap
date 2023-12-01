@@ -12,13 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('fertilizers', function (Blueprint $table) {
-            $table->id('fertilizer_id');
+            $table->id();
             $table->string('name_of_fertilizer',30)->nullable();
             $table->string('type_of_fertilizer',30)->nullable();
             $table->double('no_ofsacks',15,4);
             $table->double('unitprice_per_sacks',15,4);
             $table->double('total_cost_fertilizers',15,4);
             $table->timestamps();
+            
+            
+            // $table->id();
+            // $table->string('name_of_fertilizer',30)->nullable();
+            // $table->string('type_of_fertilizer',30)->nullable();
+            // $table->double('no_ofsacks',15,4);
+            // $table->double('unitprice_per_sacks',15,4);
+            // $table->double('total_cost_fertilizers',15,4);
+            // $table->foreignId('personal_informations_id')->nullable()->constrained('personal_informations');
+            // $table->foreignId('farm_profiles_id')->nullable()->constrained('farm_profiles');
+            // $table->timestamps();
         });
     }
 

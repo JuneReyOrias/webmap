@@ -65,13 +65,13 @@
                 <span class="toggler-icon"> </span>
                 <span class="toggler-icon"> </span>
               </button>
-              @if($errors->any())
+              {{-- @if($errors->any())
               <ul class="alert alert-warning">
                 @foreach ($errors->all() as $error)
                 <li>{{$error}}</li>
                 @endforeach
               </ul>
-              @endif
+              @endif --}}
               <div class="navbar-collapse">
                 <ul id="nav" class="navbar-nav mx-auto">
                   <li class="nav-item">
@@ -87,10 +87,8 @@
                   <li class="nav-item">
                     <a class="ud-menu-scroll" href="#team">Team</a>
                   </li> --}}
-                  <li class="nav-item">
-                    <a class="ud-menu-scroll" href="#contact">Contact</a>
-                  </li>
-                  <li class="nav-item nav-item-has-children">
+                  
+                  {{-- <li class="nav-item nav-item-has-children">
                     <a href="javascript:void(0)"> Pages </a>
                     <ul class="ud-submenu">
                       <li class="ud-submenu-item">
@@ -114,19 +112,30 @@
                         </a>
                       </li>
                       <li class="ud-submenu-item">
-                        <a href="blog-details.html" class="ud-submenu-link">
-                          Blog Details Page
-                        </a>
+        
+                      
+                        <button class="btn btn-success " class="ud-submenu-link" class="ud-main-btn ud-login-btn" onClick="add()" href="javascript:void(0)"> log</button>
                       </li>
                       <li class="ud-submenu-item">
-                        <a href="login.html" class="ud-submenu-link">
-                          Sign In Page
-                        </a>
+                        <button class="btn btn-success " class="ud-submenu-link"  class="ud-main-btn ud-login-btn" onClick="login()" href="javascript:void(0)" >  Log in</button>
                       </li>
                       <li class="ud-submenu-item">
                         <a href="404.html" class="ud-submenu-link">404 Page</a>
                       </li>
                     </ul>
+                  </li> --}}
+                
+                  <li class="nav-item">
+                    <a class="ud-menu-scroll" href="#contact">Contact</a>
+                    
+                  </li>
+                  <li class="nav-item">
+                    <a class="ud-menu-scroll" style="" onClick="login()" href="javascript:void(0)">Log in</a>
+              
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{route('register')}}" href="javascript:void(0)" >Register</a>
+              
                   </li>
                 </ul>
               </div>
@@ -135,10 +144,10 @@
                 {{-- <a href="{{ route('login') }}" class="ud-main-btn ud-login-btn">
                   Log in
                 </a> --}}
-                <button class="btn btn-success "  class="ud-main-btn ud-login-btn" onClick="login()" href="javascript:void(0)" >  Log in</button>
+                {{-- <button class="btn btn-success "  class="ud-main-btn ud-login-btn" onClick="login()" href="javascript:void(0)" >  Log in</button> --}}
                 {{-- <button class="btn btn-success "  class="ud-main-btn ud-login-btn"  href="javascript:void(0)" >  Sign Up</button> --}}
              
-                <button class="btn btn-success "  class="ud-main-btn ud-login-btn" onClick="add()" href="javascript:void(0)">  Sign Up</button>
+                {{-- <button class="btn btn-success "  class="ud-main-btn ud-login-btn" onClick="add()" href="javascript:void(0)">  Sign Up</button> --}}
                             {{-- <div class="pull-right mb-2">
                                 <a class="btn btn-success" onClick="add()" href="javascript:void(0)"> Create Company</a>
                             </div> --}}
@@ -1318,8 +1327,8 @@
                   <img src="landing_page/assets/images/logo/logo.png" alt="logo" />
                 </a>
                 <p class="ud-widget-desc">
-                  We create digital experiences for brands and companies by
-                  using technology.
+                  Zambo AgriMap is an innovative geo-mapping tool
+                  designed specifically for Zamboanga City. 
                 </p>
                 <ul class="ud-widget-socials">
                   <li>
@@ -1351,7 +1360,7 @@
                 <h5 class="ud-widget-title">About Us</h5>
                 <ul class="ud-widget-links">
                   <li>
-                    <a href="javascript:void(0)">Home</a>
+                    <a href="#home">Home</a>
                   </li>
                   <li>
                     <a href="javascript:void(0)">Features</a>
@@ -1359,9 +1368,9 @@
                   <li>
                     <a href="javascript:void(0)">About</a>
                   </li>
-                  <li>
+                  {{-- <li>
                     <a href="javascript:void(0)">Testimonial</a>
-                  </li>
+                  </li> --}}
                 </ul>
               </div>
             </div>
@@ -1378,13 +1387,13 @@
                   <li>
                     <a href="javascript:void(0)">Terms of service</a>
                   </li>
-                  <li>
+                  {{-- <li>
                     <a href="javascript:void(0)">Refund policy</a>
-                  </li>
+                  </li> --}}
                 </ul>
               </div>
             </div>
-            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+            {{-- <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
               <div class="ud-widget">
                 <h5 class="ud-widget-title">Our Products</h5>
                 <ul class="ud-widget-links">
@@ -1422,61 +1431,61 @@
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> --}}
             <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
               <div class="ud-widget">
                 <h5 class="ud-widget-title">Partners</h5>
                 <ul class="ud-widget-brands">
                   <li>
                     <a
-                      href="https://ayroui.com/"
-                      rel="nofollow noopner"
+                      href="http://wmsu.edu.ph/"
+                      rel="WMSU"
                       target="_blank"
                     >
-                      <img
-                        src="landing_page/assets/images/footer/brands/ayroui.svg"
-                        alt="ayroui"
+                      <img 
+                         src="landing_page/assets/images/footer/brands/Picture1.png"
+                        alt="WMSU" 
                       />
                     </a>
                   </li>
                   <li>
                     <a
-                      href="https://ecommercehtml.com/"
+                      href=""
                       rel="nofollow noopner"
                       target="_blank"
                     >
                       <img
-                        src="landing_page/assets/images/footer/brands/ecommerce-html.svg"
-                        alt="ecommerce-html"
+                        src="landing_page/assets/images/footer/brands/cs-logo.png"
+                        alt="CCS"
                       />
                     </a>
                   </li>
                   <li>
                     <a
-                      href="https://graygrids.com/"
+                      href=""
                       rel="nofollow noopner"
                       target="_blank"
                     >
                       <img
-                        src="landing_page/assets/images/footer/brands/graygrids.svg"
+                        src="landing_page/assets/images/footer/brands/agri-logo.png"
                         alt="graygrids"
                       />
                     </a>
                   </li>
                   <li>
                     <a
-                      href="https://lineicons.com/"
+                      href=""
                       rel="nofollow noopner"
                       target="_blank"
                     >
                       <img
-                        src="landing_page/assets/images/footer/brands/lineicons.svg"
+                        src="landing_page/assets/images/logo/logo-main.png"
                         alt="lineicons"
                       />
                     </a>
                   </li>
                   <li>
-                    <a
+                    {{-- <a
                       href="https://uideck.com/"
                       rel="nofollow noopner"
                       target="_blank"
@@ -1485,10 +1494,10 @@
                         src="landing_page/assets/images/footer/brands/uideck.svg"
                         alt="uideck"
                       />
-                    </a>
+                    </a> --}}
                   </li>
                   <li>
-                    <a
+                    {{-- <a
                       href="https://tailwindtemplates.co/"
                       rel="nofollow noopner"
                       target="_blank"
@@ -1497,7 +1506,7 @@
                         src="landing_page/assets/images/footer/brands/tailwindtemplates.svg"
                         alt="tailwindtemplates"
                       />
-                    </a>
+                    </a> --}}
                   </li>
                 </ul>
               </div>
@@ -1510,7 +1519,7 @@
           <div class="row">
             <div class="col-md-8">
               <ul class="ud-footer-bottom-left">
-                <li>
+                {{-- <li>
                   <a href="javascript:void(0)">Privacy policy</a>
                 </li>
                 <li>
@@ -1518,13 +1527,13 @@
                 </li>
                 <li>
                   <a href="javascript:void(0)">Terms of service</a>
-                </li>
+                </li> --}}
               </ul>
             </div>
             <div class="col-md-4">
               <p class="ud-footer-bottom-right">
-                Designed and Developed by
-                <a href="https://uideck.com" rel="nofollow">UIdeck</a>
+               Developed by
+                <a href="https://uideck.com" rel="nofollow">OJR</a>
               </p>
             </div>
           </div>

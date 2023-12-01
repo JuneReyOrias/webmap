@@ -8,8 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Transport extends Model
 {
     use HasFactory;
-    protected $guarded =[];
-    public function VariableCost(){
-        return$this->hasOne(\app\VariableCost::class);
+    protected $fillable=[
+        'name_of_vehicle',
+        'type_of_vehicle',
+        'total_transport_per_deliverycost',
+    ]; public function variablecost()
+    {
+        return $this->belongsTo(VariableCost::class, 'id','transports_id');
     }
 }
