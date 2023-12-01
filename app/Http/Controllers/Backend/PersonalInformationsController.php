@@ -254,10 +254,10 @@ public function Personalfarms() {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($personal_information_id)
+    public function edit($id)
     {
         // dd($farmer_no);
-        $personalInformations = PersonalInformations::where('personal_information_id',$personal_information_id)->first();
+        $personalInformations = PersonalInformations::where('id',$id)->first();
         // // $personalInformation = PersonalInformations::findOrFail($personalInformation);
         return view('personalinfo.edit')->with('personalInformation',$personalInformations);
        ;
@@ -266,7 +266,7 @@ public function Personalfarms() {
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePersonalInformationRequest $request,  $farmer_no)
+    public function update(UpdatePersonalInformationRequest $request,  $id)
     {
             // dd(($request->all()));
             try {
@@ -277,7 +277,7 @@ public function Personalfarms() {
                 // $data = $request->all();
             
                 // Update the PersonalInformations table
-                PersonalInformations::where('farmer_no', $farmer_no)->update($data);
+                PersonalInformations::where('id', $id)->update($data);
             
                 // Optionally, you can return a response indicating success
                 return redirect('/personalinfo/create')->with('message','Personal informations updated successsfully');

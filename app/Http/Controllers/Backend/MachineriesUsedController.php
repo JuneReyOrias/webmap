@@ -64,16 +64,16 @@ class MachineriesUsedController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($machine_id)
+    public function edit($id)
     {
-        $MachineneriesUsed = MachineriesUseds::where('machine_id',$machine_id)->first();
+        $MachineneriesUsed = MachineriesUseds::where('id',$id)->first();
         return view('machineries_used.machine_edit')->with('MachineneriesUsed',$MachineneriesUsed);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMachineriesUsedRequest $request,  $machine_id)
+    public function update(UpdateMachineriesUsedRequest $request,  $id)
     {
         try {
             // Get validated data from the request (if you're using validation rules)
@@ -83,7 +83,7 @@ class MachineriesUsedController extends Controller
             // $data = $request->all();
         
             // Update the PersonalInformations table
-            MachineriesUseds::where('machine_id', $machine_id)->update($data);
+            MachineriesUseds::where('id', $id)->update($data);
         
             // Optionally, you can return a response indicating success
             return redirect('/machineriesused/create')->with('message','Machineries Used updated successsfully');
@@ -96,10 +96,10 @@ class MachineriesUsedController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($machine_id)
+    public function destroy($id)
     {
         try {
-            $MachineneriesUsed = MachineriesUseds::where('machine_id', $machine_id);
+            $MachineneriesUsed = MachineriesUseds::where('id', $id);
         
             if ($MachineneriesUsed) {
                 $MachineneriesUsed->delete();

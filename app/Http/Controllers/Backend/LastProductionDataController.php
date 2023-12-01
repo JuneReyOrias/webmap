@@ -62,16 +62,16 @@ class LastProductionDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($production_id)
+    public function edit($id)
     {
-        $lastproductiondata = LastProductionDatas::where('production_id',$production_id)->first();
+        $lastproductiondata = LastProductionDatas::where('id',$id)->first();
         return view('production_data.production_edit')->with('lastproductiondata',$lastproductiondata);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateLastProductiondatasRequest $request, $production_id)
+    public function update(UpdateLastProductiondatasRequest $request, $id)
     {
         try {
             // Get validated data from the request (if you're using validation rules)
@@ -81,7 +81,7 @@ class LastProductionDataController extends Controller
             // $data = $request->all();
         
             // Update the PersonalInformations table
-            LastProductionDatas::where('production_id', $production_id)->update($data);
+            LastProductionDatas::where('id', $id)->update($data);
         
             // Optionally, you can return a response indicating success
             return redirect('/production/create')->with('message','Last Production Data updated successsfully');
@@ -95,10 +95,10 @@ class LastProductionDataController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($production_id)
+    public function destroy($nameid)
     {
         try {
-             $lastproductiondata = LastProductionDatas::where('production_id', $production_id);
+             $lastproductiondata = LastProductionDatas::where('id', $id);
         
             if ( $lastproductiondata) {
                  $lastproductiondata->delete();

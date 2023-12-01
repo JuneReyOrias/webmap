@@ -100,7 +100,15 @@ class FarmProfileController extends Controller
     //     }
     // }
    
-   
+    public function edit($id)
+    {
+        // dd($id);
+        $farmprofile = PersonalInformations::where('id',$id)->first();
+      
+        // // $personalInformation = PersonalInformations::findOrFail($personalInformation);
+        return view('farm_profile.farm_edit')->with('farmprofile',$farmprofile);
+       ;
+    }
 
 
     public function store(FarmProfileRequest $request)
@@ -244,7 +252,7 @@ return redirect('/fixedcost')->with('message', 'Farm Profile added successfully'
     //                     return response()->json(['message' => 'Error updating record: ' . $e->getMessage()], 500);
     //                 }
     // }
-    public function update(UpdateFarmProfileRequest $request, $farmno_id)
+    public function update(UpdateFarmProfileRequest $request, $id)
     {
         try {
             $data = $request->validated();
@@ -252,7 +260,7 @@ return redirect('/fixedcost')->with('message', 'Farm Profile added successfully'
             // Optionally, add logic to get farmer_no
             // $data['farmer_no'] = $this->getFarmerNo();
     
-            FarmProfile::where('farmno_id', $farmno_id)->update($data);
+            FarmProfile::where('farmno_id', $id)->update($data);
     
             return redirect('/farmprofile/create')->with('message', 'Farm Profile updated successfully');
         } catch (\Exception $e) {
@@ -266,7 +274,7 @@ return redirect('/fixedcost')->with('message', 'Farm Profile added successfully'
     public function destroy($farmno_id)
     {
         try {
-            $farmprofile = FarmProfile::where('farmno_id', $farmno_id);
+            $farmprofile = FarmProfile::where('farmno_id', $id);
         
             if ($farmprofile) {
                 $farmprofile->delete();
