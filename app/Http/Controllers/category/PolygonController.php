@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\category;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PolygonRequest;
 use App\Models\Polygon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -44,11 +45,11 @@ class PolygonController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PolygonRequest $request)
     {
         try{
         
-            // $data= $request->validated();
+            $data= $request->validated();
             // $data= $request->all();
            Polygon::create([
             'users_id' => $request->input('users_id'),

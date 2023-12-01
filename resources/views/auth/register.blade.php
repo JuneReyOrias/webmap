@@ -97,7 +97,7 @@
                             Sign up
                           </button>
                       </div>
-                      <a href={{url('/landing')}} class="d-block mt-3 text-muted">have already account? Log in</a>
+                      <a href={{url('/')}} class="d-block mt-3 text-muted">have already account? Log in</a>
                     </form>
                   </div>
                 </div>
