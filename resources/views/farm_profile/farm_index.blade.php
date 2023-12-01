@@ -40,12 +40,12 @@
           </div>
       @endsection  --}}
       
-      @foreach($personalInformations  as $persoanlinfo)
+      {{-- @foreach($personalInformations  as $persoanlinfo)
               <input id="personal_information_id" class="form-control mb-4 mb-md-0" name="id" value="{{ $persoanlinfo->id}}" placeholder="" type="text" aria-label="personal_information_id"id="floatingInput">
               <label for="floatingInput" >personal_information_id:</label>
               <input id="personal_information_id" class="form-control mb-4 mb-md-0" name="personal_information_id" value="{{ $persoanlinfo->first_name}}" placeholder="" type="text" aria-label="personal_information_id"id="floatingInput">
               <input id="personal_information_id" class="form-control mb-4 mb-md-0" name="personal_information_id" value="{{ $persoanlinfo->last_name}}" placeholder="" type="text" aria-label="personal_information_id"id="floatingInput">
-              @endforeach
+              @endforeach --}}
           <form  action{{url('farm_profiles')}} method="post"  >
             @csrf
             <div class="row mb-3">

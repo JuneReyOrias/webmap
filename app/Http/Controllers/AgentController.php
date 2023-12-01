@@ -18,6 +18,6 @@ class AgentController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/landing');
+        return redirect('/');
     }//end 
 }

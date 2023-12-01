@@ -17,7 +17,7 @@
           <h6 class="card-title"><span>IV.</span>Machineries Used</h6>
 
          <p class="text-muted mb-3">Read the <a href="https://github.com/RobinHerbots/Inputmask" target="_blank"> Official Inputmask Documentation </a>for a full list of instructions and other options.</p>
-         <form  action="{{route('machineries_used.update',$MachineneriesUsed->machine_id )}}" method="post"  >
+         <form  action="{{route('machineries_used.update',$MachineneriesUsed->id )}}" method="post"  >
             @csrf
             <div class="row mb-3">
              

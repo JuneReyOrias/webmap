@@ -24,7 +24,7 @@
           @endif
           <h6 class="card-title"><span>II.</span>Farm Profile</h6>
 
-          <form  action="{{route('farm_profile.update', $farmprofile->farmno_id)}} "method="post"  >
+          <form  action="{{route('farm_profile.update', $farmprofile->id)}} "method="post"  >
             @csrf
          
             <div class="row mb-3">

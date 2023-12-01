@@ -46,7 +46,7 @@ use App\Http\Controllers\RegisteredUserController;
 //     return view('home');
 // });
 
-Route::get('/landing', [LandingPageController::class, 'LandingPage'])->name('landing-page.page');
+Route::get('/', [LandingPageController::class, 'LandingPage'])->name('landing-page.page');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -67,16 +67,16 @@ class FixedCostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($fixed_id)
+    public function edit($id)
     {
-        $fixedcost = FixedCost::where('fixed_id',$fixed_id)->first();
+        $fixedcost = FixedCost::where('id',$id)->first();
         return view('fixed_cost.fixed_edit')->with('fixedcost',$fixedcost);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFixedCostRequest $request, $fixed_id)
+    public function update(UpdateFixedCostRequest $request, $id)
     {
         try {
             // Get validated data from the request (if you're using validation rules)
@@ -86,7 +86,7 @@ class FixedCostController extends Controller
             // $data = $request->all();
         
             // Update the PersonalInformations table
-            FixedCost::where('fixed_id', $fixed_id)->update($data);
+            FixedCost::where('id', $id)->update($data);
         
             // Optionally, you can return a response indicating success
             return redirect('/fixedcost/create')->with('message','fixed cost updated successsfully');
@@ -114,7 +114,7 @@ class FixedCostController extends Controller
             }
         } catch (\Exception $e) {
             return redirect()->route('fixed_cost.create')
-                             ->with('message', 'Error deleting Fixed Cost : ' . $e->getMessage());
+                             ->with('message', 'Error deleting Fixed Cost :' . $e->getMessage());
         }
     }
 }

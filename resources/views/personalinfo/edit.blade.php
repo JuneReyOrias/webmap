@@ -30,7 +30,7 @@
           <h6 class="card-title"><span>I.</span>Personal Information</h6>
 
          {{-- <p class="text-muted mb-3">Read the <a href="https://github.com/RobinHerbots/Inputmask" target="_blank"> Official Inputmask Documentation </a>for a full list of instructions and other options.</p> --}}
-         <form action="{{route('personalinfo.update',$personalInformation->farmer_no )}}" method="post" enctype="multipart/form-data">
+         <form action="{{route('personalinfo.update',$personalInformation->id )}}" method="post" enctype="multipart/form-data">
             {{-- {{csrf_field}} --}}@csrf
             
             <div class="row mb-3">
